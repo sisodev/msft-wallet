@@ -26,10 +26,10 @@ export default function WelcomeForm() {
             <div className={styles.form__instructions}>
                 <h1 className={styles.heading}> Welcome to the <br/> GoldmanSachs Team!</h1>
                 <br/>
-                <h3>We're excited to have you onboard</h3>
+                <h3>We\'re excited to have you onboard</h3>
                 <br/>
                 <h3>This online process will help set you up for success.</h3>
-                <h3>We'll walk you through</h3>
+                <h3>We\'ll walk you through</h3>
                 <br/>
                 <ul className={styles.instructions}>
                     <li>1. Accessing the employee poral</li>
@@ -37,7 +37,7 @@ export default function WelcomeForm() {
                     <li>3. Ordering your work equipment</li>
                 </ul>
                 <br/>
-                <h3>Please enter your name and we'll get started</h3>
+                <h3>Please enter your name and we\'ll get started</h3>
             </div>
             <div className={styles.form_form}>
                 <div className={styles.form__group}>

@@ -8,7 +8,7 @@ function Verification({router}) {
         <div className={styles.verification__container}>
             <div className={styles.verification__welcome}>
                 <h2>Hi {name}.</h2>
-                <h2>Let's verify your identity to access</h2>
+                <h2>Let\'s verify your identity to access</h2>
                 <h2>the employee portal</h2>
             </div>
             <div className={styles.identity__steps}>
