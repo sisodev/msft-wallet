@@ -1,0 +1,20 @@
+.header__container, .header_logo  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+}
+
+.header_logo {
+    gap: 10px;
+}
+
+.header_logo img {
+    padding-left: 20px;
+}
+
+
+.header_logo h3 {
+    color: white
+}

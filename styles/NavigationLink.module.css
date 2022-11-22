@@ -1,0 +1,12 @@
+.nav_item {
+	text-transform: capitalize;
+	color: gray;
+	text-decoration: none;
+	padding: 5px 10px;
+	border-bottom: 3px solid transparent;
+}
+
+.nav_item_active {
+	color: white;
+	border-color: white;
+}
