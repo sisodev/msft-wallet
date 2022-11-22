@@ -3,7 +3,7 @@ import { withRouter } from "next/router";
 import styles from "../styles/Verification.module.css"
 
 function Verification({router}) {
-    const name = router.query.name.split(" ")[0]
+    const name = router.query.name ? router.query.name.split(" ")[0] : ""
     return(
         <div className={styles.verification__container}>
             <div className={styles.verification__welcome}>
