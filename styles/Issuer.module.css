@@ -1,0 +1,45 @@
+.issuer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.issuer__header {
+    height: 30vh;
+    width: 100%;
+    background-color: rgb(24, 24, 63);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.issuer__header h2 {
+    padding: 20px;
+    text-align: center;
+    background: hsl(218, 94%, 48%);
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.issuer__header h3 {
+    padding: 8px 50px;
+    text-align: center;
+    background-color:  rgba(22, 31, 157, 0.7);
+    border-radius: 2px;
+    font-weight: 100;
+    font-size: 15px;
+}
+
+.issuer__form__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: white;
+}

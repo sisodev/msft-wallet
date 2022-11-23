@@ -1,0 +1,37 @@
+.issuer__form__wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px 5px;
+    border-radius: 10px;
+}
+
+.issuer__form__name__fields {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.issuer__action__btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.issuer_btn {
+    background: white;
+    padding: 0 20px;
+    text-align: center;
+    border: 0.5px solid blue;
+    border-radius: 5px;
+}
