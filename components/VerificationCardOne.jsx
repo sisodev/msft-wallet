@@ -1,9 +1,9 @@
-import { useRouter, withRouter } from "next/router";
+import { useRouter } from "next/router";
 import styles from "../styles/VerificationCardOne.module.css";
 
-export default function verificationCardOne({name}) {
+export default function VerificationCardOne({name}) {
     
-    const router = useRouter()
+    const router = useRouter();
 
     const clickHandler = () => {
         router.push({
