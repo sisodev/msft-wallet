@@ -1,0 +1,104 @@
+.issuance__save__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 40vh;
+    background: rgba(35, 35, 157, 0.541);
+}
+
+.issuance__header {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.issuance__header .issuance__title {
+    margin-top: 5px;
+    margin-bottom: 50px;
+    font-size: medium;
+    font-weight: 600;
+}
+
+
+
+.issuance__identity__info__card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    transform: translate(45%, -17%);
+    padding: 20px 50px 20px 50px;
+    border-radius: 20px;
+}
+
+.issuance__identity__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.issuance__identity__header h2 {
+    line-height: 30px;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.issuance__identity__subtitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.issuance__identity__subtitle  h3 {
+    font-size: 15px;
+    font-weight: lighter;
+    line-height: 23px;
+}
+
+.issuance__identity__scan__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.issucane__qr__pin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.issucane__qr__pin svg {
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.issuance__authenticator__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.issuance__authenticator__link a {
+    text-decoration: none;
+}
+.issuance__authenticator__android__ios {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 10px;
+}

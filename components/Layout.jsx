@@ -8,7 +8,7 @@ const Layout = ({children}) => {
 
     return (
         <div>
-            {router.pathname !=="/issuer" && <MyHeader/>}
+            <MyHeader/>
             {children}
             {/* <Footer/> */}
         </div>
