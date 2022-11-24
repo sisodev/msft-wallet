@@ -3,21 +3,27 @@ import styles from "../../styles/IssuanceSave.module.css"
 import {QRCodeSVG} from 'qrcode.react';
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-// import { getSession } from "../../lib/get-session";
+import { useEffect, useState } from "react";
+import io from "socket.io-client";
+
+let socket;
 
 function IssuanceSave({router}) {
     const {url, pin}= router.query;
+    const [userActivity, setUserActivity] = useState("")
 
-    const pollForResponse = async () => {
-       const response =  await fetch("/api/issuer/issuance-response")
-       console.log(JSON.parse(response))
-    }
+    const socketInitializer = async () => {
+        await fetch("/api/issuer/issuance-request-callback");
+        socket = io();
+        socket.on("new_issuance_activity", (msg) => {
+          setUserActivity(msg);
+          console.log(userActivity);
+        });
+      };
 
     useEffect(() => {
-        const myInterval = setInterval(pollForResponse, 2500);
-        return () => clearInterval(myInterval);
-    }, [])
+        socketInitializer();
+      }, []);
 
 
     return(
@@ -46,6 +52,9 @@ function IssuanceSave({router}) {
                     <div className={styles.issuance__pin}>
                         Pin: {pin}
                     </div>
+                    <div className={styles.issuance__user__activity}>
+                        {userActivity !== "Pls ignore"? <h3>{userActivity}</h3> : ""}
+                    </div>
                 </div>
                 <div className={styles.issuance__authenticator__info}>
                     <div className={styles.issuance__authenticator__link}>
@@ -60,18 +69,6 @@ function IssuanceSave({router}) {
         </>
     )
 }
-
-// import { getSession } from "../lib/get-session";
-
-// export async function getServerSideProps({ req, res }) {
-//   const session = await getSession(req, res);
-
-//   return {
-//     props: {
-//       dataInSession: session.,
-//     },
-//   };
-// }
 
 export default withRouter(IssuanceSave)
 

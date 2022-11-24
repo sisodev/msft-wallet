@@ -2,9 +2,11 @@ import { config as cfg, msalConfig, cca, msalClientCredentialRequest, issuer_api
 import { issuanceConfig } from "../../../configs/issuance_request_config";
 
 
+
 export const config = {
     api: {
       bodyParser: true,
+      externalResolver: true
     },
 }
 
@@ -13,14 +15,14 @@ export default async function  handler(req, res) {
     if(req.method === 'GET') {
         res.status(200).json({"name": "Get Issuancce"})
     }else if(req.method === 'POST') {
-        const {claims} = req.body
+        const {claims,hostname} = req.body
         const result  = await cca.acquireTokenByClientCredential(msalClientCredentialRequest)
         if(result) {
             const {accessToken} = result;
             issuanceConfig.registration.clientName = "Node.js SDK API Issuer";
             issuanceConfig.authority = cfg.IssuerAuthority;
             issuanceConfig.manifest = cfg.CredentialManifest;
-            issuanceConfig.callback.url = `https://orange-moss-06b0f1710.2.azurestaticapps.net/api/issuer/issuance-request-callback`;
+            issuanceConfig.callback.url = `https://${hostname}/api/issuer/issuance-request-callback`;
             issuanceConfig.pin.value = generatePin( issuanceConfig.pin.length );
             issuanceConfig.claims.given_name = claims.fname;
             issuanceConfig.claims.family_name = claims.lname;
@@ -45,7 +47,6 @@ export default async function  handler(req, res) {
             } else {
                 res.status(200).json( resp );       
             }
-           // res.status(200).json(payload)
         }
     }
    

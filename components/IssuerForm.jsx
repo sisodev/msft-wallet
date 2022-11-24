@@ -4,7 +4,7 @@ import { useState } from "react"
 import styles from "../styles/IssuerForm.module.css"
 import Modal from "./Modal"
 
-export default function IssuerForm() {
+export default function IssuerForm({host}) {
 
     const router = useRouter()
 
@@ -37,7 +37,7 @@ export default function IssuerForm() {
 
             const fetchOptions = {
                 method: 'POST',
-                body: JSON.stringify({claims}),
+                body: JSON.stringify({claims,hostname: host}),
                 headers: {
                 'Content-Type': 'application/json',
                 }

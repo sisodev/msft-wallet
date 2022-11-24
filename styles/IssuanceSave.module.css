@@ -102,3 +102,10 @@
     gap: 50px;
     padding: 10px;
 }
+
+.issuance__user__activity {
+    color: green;
+    border: 1px solid grey;
+    padding: 10px;
+    margin: 10px;
+}
