@@ -10,11 +10,12 @@ function IssuanceSave({router}) {
 
     const pollForResponse = async () => {
        const response =  await fetch("/api/issuer/issuance-response")
-       console.log(response.json())
+       console.log(JSON.parse(response))
     }
 
     useEffect(() => {
-        setInterval(pollForResponse, 2500)
+        const myInterval = setInterval(pollForResponse, 2500);
+        return () => clearInterval(myInterval);
     }, [])
 
 
