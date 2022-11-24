@@ -10,7 +10,7 @@ function IssuanceSave({router}) {
 
     const pollForResponse = async () => {
        const response =  await fetch("/api/issuer/issuance-response")
-       console.log(response)
+       console.log(response.json())
     }
 
     useEffect(() => {
