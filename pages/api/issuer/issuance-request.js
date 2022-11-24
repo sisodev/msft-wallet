@@ -20,7 +20,7 @@ export default async function  handler(req, res) {
             issuanceConfig.registration.clientName = "Node.js SDK API Issuer";
             issuanceConfig.authority = cfg.IssuerAuthority;
             issuanceConfig.manifest = cfg.CredentialManifest;
-            issuanceConfig.callback.url = `https://ms-entra-demo.azurewebsites.net/api/issuer/issuance-request-callback`;
+            issuanceConfig.callback.url = `https://orange-moss-06b0f1710.2.azurestaticapps.net/api/issuer/issuance-request-callback`;
             issuanceConfig.pin.value = generatePin( issuanceConfig.pin.length );
             issuanceConfig.claims.given_name = claims.fname;
             issuanceConfig.claims.family_name = claims.lname;

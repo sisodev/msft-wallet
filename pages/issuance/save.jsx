@@ -3,10 +3,21 @@ import styles from "../../styles/IssuanceSave.module.css"
 import {QRCodeSVG} from 'qrcode.react';
 import Image from "next/image";
 import Link from "next/link";
-
+import { useEffect } from "react";
 
 function IssuanceSave({router}) {
     const {url, pin}= router.query;
+
+    const pollForResponse = async () => {
+       const response =  await fetch("/api/issuer/issuance-response")
+       console.log(response)
+    }
+
+    useEffect(() => {
+        setInterval(pollForResponse, 2500)
+    }, [])
+
+
     return(
         <>
             <div className={styles.issuance__save__container}>
