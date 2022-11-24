@@ -4,6 +4,7 @@ import {QRCodeSVG} from 'qrcode.react';
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+// import { getSession } from "../../lib/get-session";
 
 function IssuanceSave({router}) {
     const {url, pin}= router.query;
@@ -59,6 +60,18 @@ function IssuanceSave({router}) {
         </>
     )
 }
+
+// import { getSession } from "../lib/get-session";
+
+// export async function getServerSideProps({ req, res }) {
+//   const session = await getSession(req, res);
+
+//   return {
+//     props: {
+//       dataInSession: session.,
+//     },
+//   };
+// }
 
 export default withRouter(IssuanceSave)
 
