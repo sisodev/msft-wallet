@@ -1,9 +1,9 @@
 import Image from "next/image";
 import styles from "../styles/VerificationCardTwo.module.css";
 
-export default function VerificationCardTwo() {
+export default function VerificationCardTwo({verified}) {
     return(
-        <div className={styles.verification__card__container}>
+        <div className={`${styles.verification__card__container} ${verified ? "" :  styles.card__blur}`}>
             <div className={styles.step__number}><h3>2</h3></div>
             <div className={styles.verification__explanation}>
                 <div className={styles.verification__head}>

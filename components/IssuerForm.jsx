@@ -25,7 +25,7 @@ export default function IssuerForm({host}) {
         // setShow(false)
         //console.log(JSON.stringify(issuanceResponse))
         //const issuanceResponse = {"requestId":"13b8891f-3811-4d3e-8d78-7ccc9f340209","url":"openid-vc://?request_uri=https://beta.did.msidentity.com/v1.0/tenants/fe83c546-e3ca-4d22-9fbf-10cb709424b1/verifiableCredentials/issuanceRequests/13b8891f-3811-4d3e-8d78-7ccc9f340209","expiry":1669264671,"pin":"1655"}
-        console.log("navigating...")
+        // console.log("navigating...")
         router.push({
             pathname: '/issuance/save',
             query: issuanceResponse

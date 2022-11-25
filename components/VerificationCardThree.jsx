@@ -1,12 +1,66 @@
 // import Image from "next/image"
+import {QRCodeSVG} from 'qrcode.react';
+import { useEffect, useState } from 'react';
+import io from "socket.io-client";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons'
 import styles from "../styles/VerificationCardThree.module.css"
 
+let socket;
 
-export default function VerificationCardThree() {
+
+export default function VerificationCardThree({verified, hostname}) {
+    const [scanIns, setScanIns] = useState(false)
+    const [userActivity, setUserActivity] = useState("")
+    const [presentationResponse, setPresentationResponse] =  useState({url: "", requestId: "", expiry: ""})
+
+    const socketInitializer = async () => {
+        await fetch("/api/verifier/presentation-request-callback");
+        socket = io();
+        socket.on("new_verification_activity", (msg) => {
+          console.log(`new message: ${msg}`)
+          setUserActivity(msg);
+          console.log(userActivity);
+        });
+      };
+
+      useEffect(() => {
+        socketInitializer();
+      }, []);
+
+    const fetchPresentationRequest = async () => {
+        setScanIns(!scanIns)
+        const fetchOptions = {
+            method: 'POST',
+            body: JSON.stringify({hostname}),
+            headers: {
+            'Content-Type': 'application/json',
+            }
+        };
+
+        try{
+            const response = await fetch('api/verifier/presentation-request',fetchOptions)
+            const data = await response.json()
+            console.log("received response")
+            console.log(data)
+            setPresentationResponse(prev => ({
+                ...prev,
+                url: data.url,
+                requestId: data.requestId,
+                expiry: data.expiry 
+            }))
+        }catch(e) {
+            console.error(e)
+        } 
+
+
+    }
+
+    
+
     return(
-        <div className={styles.verification__card__container}>
+        
+        <div className={`${styles.verification__card__container} ${verified ? "" :  styles.card__blur}`}>
             <div className={styles.step__number}>
                 <div className={styles.number_content}>
                     <h3>3</h3>
@@ -14,19 +68,21 @@ export default function VerificationCardThree() {
             </div>
             <div className={styles.verification__explanation}>
                 <div className={styles.verification__head}>
-                    <h2>Access the</h2>
-                    <h2>personalized</h2>
-                    <h2>employee portal</h2>
+                    <h2>{scanIns ? "Scan the QR code" : "Access the"}</h2>
+                    <h2>{scanIns ? "With the Microsoft": "personalized"}</h2>
+                    <h2>{scanIns ? "Authenticator app":"employee portal"}</h2>
                 </div>
                 <div className={styles.step__desc}>
-                    <p>You will need a Verifiable</p>
-                    <p>Credential and Microsoft</p>
-                    <p>Authenticator to access.</p>
+                    {scanIns ? <p>In the app, <b>open</b> the Verified ID tab</p>:<p>You will need a Verifiable</p>}
+                    {scanIns ? <p>and <b>tap</b> on the QR code scan icon.</p>:<p>Credential and Microsoft.</p>}
+                    {scanIns ? "":<p>Authenticator to access.</p>}
                 </div>
             </div>
-            <div className={styles.verification__button}>
-                <button><FontAwesomeIcon icon={faFileSignature} /> Access Personalized portal</button>
-            </div>
+            { userActivity !== "" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""}
+            {scanIns ? <div className={styles.verification__qr__code}> 
+                   { presentationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> :  <QRCodeSVG value={presentationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
+                            <button onClick={fetchPresentationRequest}><FontAwesomeIcon icon={faFileSignature} /> Access Personalized portal</button>
+            </div>}
     </div>
     )
 }

@@ -6,8 +6,10 @@
     border: 1px solid white;
     background-color: white;
     border-radius: 8px;
-    padding: 30px 20px;
+    padding: 50px 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-width: 300px;
+    min-height: 450px; 
 }
 
 .step__number {
@@ -46,4 +48,12 @@
     border-radius: 30px;
     font-weight: 600;
     margin-bottom: 20px;
+}
+
+.verified__button button {
+    border: none;
+    border-bottom: 0.5px solid skyblue;
+    text-align: center;
+    background: white;
+    cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styles from "../styles/VerificationCardOne.module.css";
 
-export default function VerificationCardOne({name}) {
+export default function VerificationCardOne({name, verified, changeIsVerified}) {
     
     const router = useRouter();
 
@@ -26,10 +26,10 @@ export default function VerificationCardOne({name}) {
                 <p>here and continue to step two</p>
             </div>
             <div className={styles.verification__button}>
-                <button onClick={clickHandler}>Verify with True Identity</button>
+                <button disabled={verified} onClick={clickHandler}>{verified ? "Verified": "Verify with True Identity"}</button>
             </div>
-            <div className={styles.verified__button}>
-                <a href="">I have been verified </a>
+            <div className={styles.verified__button} >
+                <button onClick={changeIsVerified}>{verified ? "" : <p>I have been verified </p>}</button>
             </div>
         </div>
     )

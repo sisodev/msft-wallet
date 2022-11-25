@@ -1,12 +1,20 @@
 import Image from "next/image";
 import { withRouter } from "next/router";
+import { useState } from "react";
 import VerificationCardOne from "../components/VerificationCardOne";
 import VerificationCardThree from "../components/VerificationCardThree";
 import VerificationCardTwo from "../components/VerificationCardTwo";
 import styles from "../styles/Verification.module.css"
 
-function Verification({router}) {
+function Verification({router, hostname}) {
+    const [isVerified, setIsVerified] = useState(false)
     const name = router.query.name ? router.query.name.split(" ")[0] : ""
+
+    const handleIsVerified = () =>{
+        setIsVerified(!isVerified)
+    }
+
+
     return(
         <>
         <div className={styles.verification__container}>
@@ -20,12 +28,20 @@ function Verification({router}) {
             </div>
         </div>
         <div className={styles.verification__cards}>
-            <VerificationCardOne name={ router.query.name ? router.query.name : ""}/>
-            <VerificationCardTwo/>
-            <VerificationCardThree/>
+            <VerificationCardOne name={ router.query.name ? router.query.name : ""} verified={isVerified} changeIsVerified={handleIsVerified}/>
+            <VerificationCardTwo verified={isVerified}/>
+            <VerificationCardThree verified={isVerified} hostname={hostname}/>
         </div>
         </>
     )
+}
+
+export async function getServerSideProps(context){
+    return {
+      props: {
+        hostname: context.req.headers.host
+      }
+    }
 }
 
 export default withRouter(Verification);

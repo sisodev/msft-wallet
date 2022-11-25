@@ -15,6 +15,7 @@ export const config = {
 }
 
 export const issuer_api_request_endpoint = "https://verifiedid.did.msidentity.com/v1.0/verifiableCredentials/createIssuanceRequest"
+export const verifier_api_request_endpoint = "https://verifiedid.did.msidentity.com/v1.0/verifiableCredentials/createPresentationRequest"
 
 export const msalConfig = {
     auth: {

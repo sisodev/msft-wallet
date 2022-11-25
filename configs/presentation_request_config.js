@@ -1,4 +1,4 @@
-export const presentation_request_config = {
+export const presentationConfig = {
     "includeQRCode": false,
     "callback": {
       "url": "https://YOURPUBLICREACHABLEHOSTNAME/api/verifier/presentationCallback",

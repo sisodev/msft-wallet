@@ -13,8 +13,12 @@ export default async function  handler(req, res) {
     const io = new Server(res.socket.server);
     if(req.method === "GET") {
           res.socket.server.io = io;
-          io.on("connection", (socket) => {
+          io.once("connection", (socket) => {
+            console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
             socket.emit('new_issuance_activity', "Pls ignore");
+            socket.on('disconnect', () => {
+                console.log('Disconnected');
+            });
           });
           res.end()
           return
@@ -23,6 +27,7 @@ export default async function  handler(req, res) {
             const issuanceResponse = req.body;
             io.on("connection", (socket) => {
                 if ( issuanceResponse.requestStatus == "request_retrieved" ) {
+                    console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
                     let message = "QR Code is scanned. Waiting for issuance to complete...";
                     console.log(message);
                     socket.emit('new_issuance_activity', message);
@@ -30,6 +35,7 @@ export default async function  handler(req, res) {
                     return;
                 }
                 if ( issuanceResponse.requestStatus == "issuance_successful" ) {
+                    console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
                     let message = "Credential successfully issued";
                     console.log(message);
                     socket.emit('new_issuance_activity', message);

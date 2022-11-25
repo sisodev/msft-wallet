@@ -6,8 +6,21 @@
     border: 1px solid white;
     background-color: white;
     border-radius: 8px;
-    padding: 22px 15px;
+    padding: 45px 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-width: 300px;
+    min-height: 450px; 
+}
+
+.card__blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
 }
 
 .step__number {
