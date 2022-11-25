@@ -27,7 +27,8 @@ function IssuanceSave({router}) {
 
 
     return(
-        <>
+    <>
+        <div className={styles.issuance__save__wrapper}>
             <div className={styles.issuance__save__container}>
                 <div className={styles.issuance__header}>
                     <div className={styles.issuance__title}><h1>True Identity</h1></div>
@@ -66,7 +67,8 @@ function IssuanceSave({router}) {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
+    </>
     )
 }
 

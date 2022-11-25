@@ -1,9 +1,19 @@
+.issuance__save__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white !important;
+}
+
 .issuance__save__container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     height: 40vh;
+    width: 100%;
     background: rgba(35, 35, 157, 0.541);
 }
 
@@ -29,10 +39,10 @@
     display: flex;
     flex-direction: column;
     background: white;
-    position: absolute;
-    transform: translate(45%, -17%);
     padding: 20px 50px 20px 50px;
     border-radius: 20px;
+    position: absolute;
+    top: 170px;
 }
 
 .issuance__identity__header {
