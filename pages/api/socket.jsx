@@ -1,5 +1,12 @@
 import { Server } from "socket.io";
 
+export const config = {
+  api: {
+    bodyParser: true,
+    externalResolver: true
+  },
+}
+
 
 export default function SocketHandler(req, res) {
   // It means that socket server was already initialised
