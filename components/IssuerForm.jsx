@@ -4,7 +4,7 @@ import { useState } from "react"
 import styles from "../styles/IssuerForm.module.css"
 import Modal from "./Modal"
 
-export default function IssuerForm({host}) {
+export default function IssuerForm({name : fullname, host}) {
 
     const router = useRouter()
 
@@ -26,9 +26,11 @@ export default function IssuerForm({host}) {
         //console.log(JSON.stringify(issuanceResponse))
         //const issuanceResponse = {"requestId":"13b8891f-3811-4d3e-8d78-7ccc9f340209","url":"openid-vc://?request_uri=https://beta.did.msidentity.com/v1.0/tenants/fe83c546-e3ca-4d22-9fbf-10cb709424b1/verifiableCredentials/issuanceRequests/13b8891f-3811-4d3e-8d78-7ccc9f340209","expiry":1669264671,"pin":"1655"}
         // console.log("navigating...")
+        const {url, pin} = issuanceResponse;
+        console.log(issuanceResponse)
         router.push({
             pathname: '/issuance/save',
-            query: issuanceResponse
+            query: {url, pin, fullname}
         }, "/issuance/save")
     }
 

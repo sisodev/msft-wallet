@@ -5,6 +5,15 @@ const nextConfig = {
   output: 'standalone',
   env : {
     PORT: '3000'
+  },
+  redirects: async () => {
+    return [
+      {
+        source: "/",
+        destination: "/landing",
+        permanent: true
+      }
+    ]
   }
 }
 

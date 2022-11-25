@@ -28,7 +28,7 @@ function Verification({router, hostname}) {
             </div>
         </div>
         <div className={styles.verification__cards}>
-            <VerificationCardOne name={ router.query.name ? router.query.name : ""} verified={isVerified} changeIsVerified={handleIsVerified}/>
+            <VerificationCardOne name={ router.query.name ? router.query.name : "John Doe"} verified={isVerified} changeIsVerified={handleIsVerified}/>
             <VerificationCardTwo verified={isVerified}/>
             <VerificationCardThree verified={isVerified} hostname={hostname}/>
         </div>

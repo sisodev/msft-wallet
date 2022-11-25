@@ -1,0 +1,26 @@
+.issuance__success__card__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+    border: 1px solid white;
+    background: white;
+    position: absolute;
+    top: 150px;
+    min-height: 300px;
+    min-width:  500px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.issuance__return__button button{
+    text-align: center;
+    padding: 10px 60px;
+    background: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-weight: 900;
+    font-size: 17px;
+}

@@ -5,12 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
+import IssuanceSuccess from "../../components/IssuanceSuccess";
 
 let socket;
 
 function IssuanceSave({router}) {
-    const {url, pin}= router.query;
+    console.log(router.query)
+    const {url, pin, fullname}= router.query;
     const [userActivity, setUserActivity] = useState("")
+    const [success, setIsSuccess] = useState(false)
 
     const socketInitializer = async () => {
         await fetch("/api/issuer/issuance-request-callback");
@@ -18,6 +21,9 @@ function IssuanceSave({router}) {
         socket.on("new_issuance_activity", (msg) => {
           setUserActivity(msg);
           console.log(userActivity);
+          if(userActivity.match("Credential successfully issued")){
+            setIsSuccess(true)
+          }
         });
       };
 
@@ -35,7 +41,7 @@ function IssuanceSave({router}) {
                     <div className={styles.issuance__heading}><h2>Issue my Verified ID</h2></div>
                 </div>
             </div>
-            <div className={styles.issuance__identity__info__card}>
+            {success ?  <IssuanceSuccess fullname={fullname}/> : <div className={styles.issuance__identity__info__card}>
                 <div className={styles.issuance__identity__header}>
                     <h2>Scan the QR code with Microsoft</h2>
                     <h2>Authenticator to retrieve and save your</h2>
@@ -66,7 +72,7 @@ function IssuanceSave({router}) {
                         <Image src="/app_store.png" alt="app_store" width={150} height={40} />
                     </div>
                 </div>
-            </div>
+            </div>}
         </div>
     </>
     )

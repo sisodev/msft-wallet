@@ -84,3 +84,17 @@
     font-weight: 600;
     margin-bottom: 70px;
 }
+
+.verification__message p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .verification__message p {
+    text-align: center;
+    min-width: 50px;
+    min-height: 100px;;
+    background-color: grey;
+} */
