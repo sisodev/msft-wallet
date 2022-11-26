@@ -10,7 +10,6 @@ import IssuanceSuccess from "../../components/IssuanceSuccess";
 let socket;
 
 function IssuanceSave({router}) {
-    console.log(router.query)
     const {url, pin, fullname}= router.query;
     const [userActivity, setUserActivity] = useState("")
     const [success, setIsSuccess] = useState(false)
@@ -18,13 +17,15 @@ function IssuanceSave({router}) {
     const socketInitializer = async () => {
         await fetch("/api/issuer/issuance-request-callback");
         socket = io();
-        socket.on("new_issuance_activity", (msg) => {
+        socket.once("new_issuance_activity", (msg) => {
           setUserActivity(msg);
-          console.log(userActivity);
-          if(userActivity.match("Credential successfully issued")){
-            setIsSuccess(true)
-          }
+          setIsSuccess(false)
         });
+
+        socket.once("issuance_complete", (msg) => {
+            setUserActivity(msg);
+            setIsSuccess(true)
+        })
       };
 
     useEffect(() => {
@@ -61,6 +62,7 @@ function IssuanceSave({router}) {
                     </div>
                     <div className={styles.issuance__user__activity}>
                         {userActivity !== "Pls ignore"? <h3>{userActivity}</h3> : ""}
+                        {userActivity === "Credential successfully issued" ? setIsSuccess(true):  ""}
                     </div>
                 </div>
                 <div className={styles.issuance__authenticator__info}>

@@ -5,12 +5,12 @@ import styles from "../styles/IssuanceSuccess.module.css";
 
 export default function IssuanceSuccess({fullname = "John Doe"}) {
 
-    const router = useRouter()
-
+    const router = useRouter();
+    const name  = fullname.split(" ")[0];
     const handleClick = () => {
         router.push({
             pathname: '/verification',
-            query: fullname.split(" ")[0]
+            query: name
         }, '/verification');
     }
 

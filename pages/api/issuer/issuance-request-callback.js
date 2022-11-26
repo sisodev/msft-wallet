@@ -13,9 +13,10 @@ export default async function  handler(req, res) {
     const io = new Server(res.socket.server);
     if(req.method === "GET") {
           res.socket.server.io = io;
-          io.once("connection", (socket) => {
+          io.on("connection", (socket) => {
             console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
-            socket.emit('new_issuance_activity', "Pls ignore");
+            console.log(`make a private connection to ${socket.id}`)
+            io.to(socket.id).emit('new_issuance_activity', "Pls ignore");
             socket.on('disconnect', () => {
                 console.log('Disconnected');
             });
@@ -30,24 +31,18 @@ export default async function  handler(req, res) {
                     console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
                     let message = "QR Code is scanned. Waiting for issuance to complete...";
                     console.log(message);
-                    socket.emit('new_issuance_activity', message);
-                    res.status(200).json(issuanceResponse)
-                    return;
+                    io.to(socket.id).emit('new_issuance_activity', message);
                 }
                 if ( issuanceResponse.requestStatus == "issuance_successful" ) {
                     console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
                     let message = "Credential successfully issued";
                     console.log(message);
-                    socket.emit('new_issuance_activity', message);
-                    res.status(200).json(issuanceResponse)
-                    return;
+                    io.to(socket.id).emit('issuance_complete', message);
                 }
                 if ( issuanceResponse.requestStatus == "issuance_error" ) {
                     let message = "Credential  failed to issue";
                     console.log(message);
-                    socket.emit('new_issuance_activity', message);
-                    res.status(200).json(issuanceResponse)
-                    return;
+                    io.to(socket.id).emit('new_issuance_activity', message);
                 }
             })
         }

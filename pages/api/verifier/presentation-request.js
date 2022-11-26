@@ -1,5 +1,6 @@
 import { config as cfg, msalConfig, cca, msalClientCredentialRequest, verifier_api_request_endpoint } from "../../../configs/config";
 import { presentationConfig } from "../../../configs/presentation_request_config";
+import { v4 as uuidv4 } from 'uuid';
 
 export const config = {
     api: {
@@ -14,11 +15,13 @@ export default async function  handler(req, res) {
         const {hostname} = req.body
         const result  = await cca.acquireTokenByClientCredential(msalClientCredentialRequest)
         if(result) {
-            let accessToken = result.accessToken;
+            const accessToken = result.accessToken;
             presentationConfig.registration.clientName = "Node.js SDK API Verifier";
             presentationConfig.authority = cfg["VerifierAuthority"]
             presentationConfig.requestedCredentials[0].acceptedIssuers[0] = cfg["IssuerAuthority"]
             presentationConfig.callback.url = `https://${hostname}/api/verifier/presentation-request-callback`;
+            const apiKey = uuidv4();
+            presentationConfig.callback.headers['api-key'] = apiKey;
             const payload = JSON.stringify(presentationConfig);
             const fetchOptions = {
                 method: 'POST',

@@ -1,5 +1,6 @@
 import { config as cfg, msalConfig, cca, msalClientCredentialRequest, issuer_api_request_endpoint } from "../../../configs/config";
 import { issuanceConfig } from "../../../configs/issuance_request_config";
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -23,6 +24,8 @@ export default async function  handler(req, res) {
             issuanceConfig.authority = cfg.IssuerAuthority;
             issuanceConfig.manifest = cfg.CredentialManifest;
             issuanceConfig.callback.url = `https://${hostname}/api/issuer/issuance-request-callback`;
+            const apiKey = uuidv4();
+            issuanceConfig.callback.headers['api-key'] = apiKey;
             issuanceConfig.pin.value = generatePin( issuanceConfig.pin.length );
             issuanceConfig.claims.given_name = claims.fname;
             issuanceConfig.claims.family_name = claims.lname;

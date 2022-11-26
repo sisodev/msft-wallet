@@ -3,6 +3,7 @@ import IssuerForm from "../components/IssuerForm"
 import styles from "../styles/Issuer.module.css"
 
 function Issuer({router, hostname}) {
+    const {name} = router.query
     return(
         <div className={styles.issuer__container}>
             <div className={styles.issuer__header}>
@@ -11,7 +12,7 @@ function Issuer({router, hostname}) {
                 <h3>Please enter Details here</h3>
             </div>
             <div className={styles.issuer__form__container}>
-                <IssuerForm host={hostname}/>
+                <IssuerForm name={name} host={hostname}/>
             </div>
         </div>
     )

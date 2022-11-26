@@ -17,11 +17,15 @@ export default function VerificationCardThree({verified, hostname}) {
     const socketInitializer = async () => {
         await fetch("/api/verifier/presentation-request-callback");
         socket = io();
-        socket.on("new_verification_activity", (msg) => {
+        socket.once("new_verification_activity", (msg) => {
           console.log(`new message: ${msg}`)
           setUserActivity(msg);
-          console.log(userActivity);
         });
+
+        socket.once("verification_complete", (msg) => {
+            console.log(`verification complete: ${msg}`)
+            setUserActivity(msg);
+        })
       };
 
       useEffect(() => {
@@ -41,8 +45,6 @@ export default function VerificationCardThree({verified, hostname}) {
         try{
             const response = await fetch('api/verifier/presentation-request',fetchOptions)
             const data = await response.json()
-            console.log("received response")
-            console.log(data)
             setPresentationResponse(prev => ({
                 ...prev,
                 url: data.url,
