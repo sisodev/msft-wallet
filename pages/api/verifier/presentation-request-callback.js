@@ -1,5 +1,3 @@
-import { getSession } from "../../../lib/get-session";
-
 export const config = {
     api: {
       bodyParser: true,
@@ -10,7 +8,6 @@ export const config = {
 
 export default async function  handler(req, res) {
      if(req.method === "POST") {
-        const session = await getSession(req, res);
         const presentationResponse = req.body;
             if ( presentationResponse.requestStatus == "request_retrieved" ) {
                 let message = "QR Code is scanned. Waiting for validation to complete...";
