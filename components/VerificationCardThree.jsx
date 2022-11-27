@@ -1,36 +1,19 @@
-// import Image from "next/image"
 import {QRCodeSVG} from 'qrcode.react';
 import { useEffect, useState } from 'react';
-import io from "socket.io-client";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons'
 import styles from "../styles/VerificationCardThree.module.css"
 
-let socket;
 
 
-export default function VerificationCardThree({verified, hostname}) {
+export default function VerificationCardThree({verified, hostname, verification_state}) {
     const [scanIns, setScanIns] = useState(false)
     const [userActivity, setUserActivity] = useState("")
     const [presentationResponse, setPresentationResponse] =  useState({url: "", requestId: "", expiry: ""})
 
-    const socketInitializer = async () => {
-        await fetch("/api/verifier/presentation-request-callback");
-        socket = io();
-        socket.once("new_verification_activity", (msg) => {
-          console.log(`new message: ${msg}`)
-          setUserActivity(msg);
-        });
-
-        socket.once("verification_complete", (msg) => {
-            console.log(`verification complete: ${msg}`)
-            setUserActivity(msg);
-        })
-      };
-
-      useEffect(() => {
-        socketInitializer();
-      }, []);
+    useEffect(() => {
+        console.log(verification_state)
+    }, [verification_state])
 
     const fetchPresentationRequest = async () => {
         setScanIns(!scanIns)
@@ -54,8 +37,6 @@ export default function VerificationCardThree({verified, hostname}) {
         }catch(e) {
             console.error(e)
         } 
-
-
     }
 
     
@@ -88,3 +69,4 @@ export default function VerificationCardThree({verified, hostname}) {
     </div>
     )
 }
+

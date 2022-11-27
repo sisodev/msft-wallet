@@ -24,6 +24,8 @@ export default async function  handler(req, res) {
             issuanceConfig.authority = cfg.IssuerAuthority;
             issuanceConfig.manifest = cfg.CredentialManifest;
             issuanceConfig.callback.url = `https://${hostname}/api/issuer/issuance-request-callback`;
+            issuanceConfig.callback.state = uuidv4();
+            console.log(`in the request ${issuanceConfig.callback.state}`)
             const apiKey = uuidv4();
             issuanceConfig.callback.headers['api-key'] = apiKey;
             issuanceConfig.pin.value = generatePin( issuanceConfig.pin.length );
@@ -45,6 +47,7 @@ export default async function  handler(req, res) {
             const response = await fetch(issuer_api_request_endpoint, option);
             const resp = await response.json()
             resp.pin = issuanceConfig.pin.value
+            resp.state = issuanceConfig.callback.state
             if ( response.status > 299 ) {
                 res.status(400).json( resp.error );  
             } else {

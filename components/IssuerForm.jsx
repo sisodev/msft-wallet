@@ -26,11 +26,11 @@ export default function IssuerForm({name : fullname, host}) {
         //console.log(JSON.stringify(issuanceResponse))
         //const issuanceResponse = {"requestId":"13b8891f-3811-4d3e-8d78-7ccc9f340209","url":"openid-vc://?request_uri=https://beta.did.msidentity.com/v1.0/tenants/fe83c546-e3ca-4d22-9fbf-10cb709424b1/verifiableCredentials/issuanceRequests/13b8891f-3811-4d3e-8d78-7ccc9f340209","expiry":1669264671,"pin":"1655"}
         // console.log("navigating...")
-        const {url, pin} = issuanceResponse;
-        console.log(issuanceResponse)
+        const {url, pin, state} = issuanceResponse;
+        console.log(`the namespace is ${state}`)
         router.push({
             pathname: '/issuance/save',
-            query: {url, pin, fullname}
+            query: {url, pin, state, fullname}
         }, "/issuance/save")
     }
 
@@ -49,9 +49,9 @@ export default function IssuerForm({name : fullname, host}) {
                 const response = await fetch('api/issuer/issuance-request',fetchOptions)
                 const data = await response.json()
                 console.log("received response")
-                console.log(data)
+                console.log(console.log(`the issueance response received is ${JSON.stringify(data)}`))
                 setIssuanceResponse(data)
-                console.log(issuanceResponse)
+                console.log(`the issueance response received is ${JSON.stringify(issuanceResponse)}`)
                 setModalMessage("Verification Complete")
             }catch(e) {
                 setModalMessage("Something went wrong")

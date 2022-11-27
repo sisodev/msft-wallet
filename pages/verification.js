@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { withRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VerificationCardOne from "../components/VerificationCardOne";
 import VerificationCardThree from "../components/VerificationCardThree";
 import VerificationCardTwo from "../components/VerificationCardTwo";
 import styles from "../styles/Verification.module.css"
+// import {getSession} from  "../lib/get-session";
 
 function Verification({router, hostname}) {
     const [isVerified, setIsVerified] = useState(false)
@@ -13,6 +14,10 @@ function Verification({router, hostname}) {
     const handleIsVerified = () =>{
         setIsVerified(!isVerified)
     }
+
+    // useEffect(() => {
+    //     console.log(verification_state)
+    // }, [verification_state])
 
 
     return(
@@ -30,19 +35,26 @@ function Verification({router, hostname}) {
         <div className={styles.verification__cards}>
             <VerificationCardOne name={ router.query.name ? router.query.name : "John Doe"} verified={isVerified} changeIsVerified={handleIsVerified}/>
             <VerificationCardTwo verified={isVerified}/>
-            <VerificationCardThree verified={isVerified} hostname={hostname}/>
+            <VerificationCardThree verified={isVerified} hostname={hostname} />
         </div>
         </>
     )
 }
 
-export async function getServerSideProps(context){
+
+export async function getServerSideProps(context) {
+    const {req,res} = context
+    // const session = await getSession(req,res)
+    // session.message = session.message ? session.message : "nothing here.."
+    // console.log(`the session message is ${session.message}`)
     return {
-      props: {
-        hostname: context.req.headers.host
-      }
+        props: {
+            // verification_state : session.message,
+            hostname: context.req.headers.host
+        }
     }
 }
+
 
 export default withRouter(Verification);
 

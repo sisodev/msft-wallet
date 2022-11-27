@@ -1,8 +1,4 @@
-import { Server } from "socket.io";
-
-import { EventEmitter } from 'node:events';
-
-EventEmitter.defaultMaxListeners = Infinity;
+import { getSession } from "../../../lib/get-session";
 
 export const config = {
     api: {
@@ -13,30 +9,18 @@ export const config = {
 
 
 export default async function  handler(req, res) {
-    const io = new Server(res.socket.server);
-    if(req.method === "GET") {
-          res.socket.server.io = io;
-          io.on("connection", (socket) => {
-            console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
-            console.log(`make a private connection to ${socket.id}`)
-            io.to(socket.id).emit('new_verification_activity', "");
-          });
-          return res.end()
-          
-     }else if(req.method === "POST") {
-        res.socket.server.io = io;
+     if(req.method === "POST") {
+        const session = await getSession(req, res);
         const presentationResponse = req.body;
-        io.on("connection", (socket) => {
             if ( presentationResponse.requestStatus == "request_retrieved" ) {
-                console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
                 let message = "QR Code is scanned. Waiting for validation to complete...";
+                session.message = message
                 console.log(message);
-                io.to(socket.id).emit('new_verification_activity', message);
-                return;
+                // io.to(socket.id).emit('new_verification_activity', message);
+                return res.end();
             }
 
             if ( presentationResponse.requestStatus == "presentation_verified" ) {
-                console.log(`number of sockets connected::: ${io.engine.clientsCount}`)
                 console.log("Verification complete")
                 // const message = {
                 //     "status": presentationResponse.requestStatus,
@@ -48,10 +32,11 @@ export default async function  handler(req, res) {
                 //     "presentationResponse": presentationResponse,
                 //     "status": "Validation Complete"
                 // }
-                io.to(socket.id).emit('verification_complete', "Verification Complete")
-                return;
+                let message = "Verification complete"
+                session.message = message
+                return res.end();
             }
-        })
+        // })
      }
 
 }

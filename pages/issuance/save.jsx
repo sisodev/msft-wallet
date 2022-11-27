@@ -4,33 +4,35 @@ import {QRCodeSVG} from 'qrcode.react';
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
+
 import IssuanceSuccess from "../../components/IssuanceSuccess";
 
-let socket;
+
 
 function IssuanceSave({router}) {
-    const {url, pin, fullname}= router.query;
+    const {url, pin, state, fullname}= router.query;
     const [userActivity, setUserActivity] = useState("")
     const [success, setIsSuccess] = useState(false)
 
-    const socketInitializer = async () => {
-        await fetch("/api/issuer/issuance-request-callback");
-        socket = io();
-        socket.once("new_issuance_activity", (msg) => {
-          setUserActivity(msg);
-          setIsSuccess(false)
-        });
-
-        socket.once("issuance_complete", (msg) => {
-            setUserActivity(msg);
+    const polling = async () => {
+        const resp = await fetch(`/api/issuer/issuance-request-callback-polling?state=${state}`)
+        const data = await resp.text()
+        if( data.match("Credential successfully issued")) {
+            setUserActivity("Credential successfully issued")
             setIsSuccess(true)
-        })
-      };
+        }else if (data.match("QR Code is scanned. Waiting for issuance to complete...")){
+             setIsSuccess(false)
+            setUserActivity(data)
+        }else {
+            setIsSuccess(false)
+            setUserActivity("")
+        }
+    }
 
     useEffect(() => {
-        socketInitializer();
-      }, []);
+      const poolingId =   setInterval(() => polling(),2500)
+      return () => clearInterval(poolingId)
+    },[])
 
 
     return(
@@ -61,7 +63,7 @@ function IssuanceSave({router}) {
                         Pin: {pin}
                     </div>
                     <div className={styles.issuance__user__activity}>
-                        {userActivity !== "Pls ignore"? <h3>{userActivity}</h3> : ""}
+                        {userActivity !== ""? <h3>{userActivity}</h3> : ""}
                         {userActivity === "Credential successfully issued" ? setIsSuccess(true):  ""}
                     </div>
                 </div>
@@ -82,3 +84,13 @@ function IssuanceSave({router}) {
 
 export default withRouter(IssuanceSave)
 
+// export async function getServerSideProps({req,res}) {
+//     const session = await getSession(req,res)
+//     session.message = session.message ? session.message : "nothing here.."
+//     console.log(`the session message is ${session.message}`)
+//     return {
+//         props: {
+//             issuance_state : session.message
+//         }
+//     }
+// }
