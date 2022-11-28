@@ -6,14 +6,39 @@ import styles from "../styles/VerificationCardThree.module.css"
 
 
 
-export default function VerificationCardThree({verified, hostname, verification_state}) {
+export default function VerificationCardThree({verified, hostname, handlVerificationStatus}) {
     const [scanIns, setScanIns] = useState(false)
+    // const [isloading, setIsLoading] = useState(false)
     const [userActivity, setUserActivity] = useState("")
-    const [presentationResponse, setPresentationResponse] =  useState({url: "", requestId: "", expiry: ""})
+    const [presentationResponse, setPresentationResponse] =  useState({url: "", requestId: "", expiry: "", state: ""})
+    const [success, setIsSuccess] = useState(false)
+
+
+
 
     useEffect(() => {
-        console.log(verification_state)
-    }, [verification_state])
+        if(success) {
+            handlVerificationStatus("Verification complete")
+            setIsSuccess(true)
+        }
+    }, [success])
+
+    const polling = async (status) => {
+            console.log(`the status id is ${status}`)
+            const resp = await fetch(`/api/verifier/presentation-request-callback-polling?state=${status}`)
+            const data = await resp.text()
+            console.log(data)
+            if (data === "Verification complete"){
+                console.log("verification is completed")
+                 setIsSuccess(true)
+                 setUserActivity(data)             
+                 console.log("show now show pop up")
+            }else {
+                console.log("verification pending...")
+                setIsSuccess(false)
+                setUserActivity(data)
+            }
+    }
 
     const fetchPresentationRequest = async () => {
         setScanIns(!scanIns)
@@ -28,15 +53,15 @@ export default function VerificationCardThree({verified, hostname, verification_
         try{
             const response = await fetch('api/verifier/presentation-request',fetchOptions)
             const data = await response.json()
-            setPresentationResponse(prev => ({
-                ...prev,
-                url: data.url,
-                requestId: data.requestId,
-                expiry: data.expiry 
-            }))
+            console.log(`response from presentation request : ${JSON.stringify(data,null,2)}`)
+            setPresentationResponse(data)
+            intervalID = setInterval(() => polling(data.state), 2500)
+            if(success) {
+                clearInterval(intervalID)
+            }
         }catch(e) {
             console.error(e)
-        } 
+        }
     }
 
     
@@ -62,6 +87,7 @@ export default function VerificationCardThree({verified, hostname, verification_
                 </div>
             </div>
             { userActivity !== "" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""}
+            {success ?  () => handlVerificationStatus("Verification complete"): ""}
             {scanIns ? <div className={styles.verification__qr__code}> 
                    { presentationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> :  <QRCodeSVG value={presentationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
                             <button onClick={fetchPresentationRequest}><FontAwesomeIcon icon={faFileSignature} /> Access Personalized portal</button>

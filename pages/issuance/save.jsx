@@ -15,18 +15,21 @@ function IssuanceSave({router}) {
     const [success, setIsSuccess] = useState(false)
 
     const polling = async () => {
-        const resp = await fetch(`/api/issuer/issuance-request-callback-polling?state=${state}`)
-        const data = await resp.text()
-        if( data.match("Credential successfully issued")) {
-            setUserActivity("Credential successfully issued")
-            setIsSuccess(true)
-        }else if (data.match("QR Code is scanned. Waiting for issuance to complete...")){
-             setIsSuccess(false)
-            setUserActivity(data)
-        }else {
-            setIsSuccess(false)
-            setUserActivity("")
+        if(state !== null || state !== "") {
+            const resp = await fetch(`/api/issuer/issuance-request-callback-polling?state=${state}`)
+            const data = await resp.text()
+            if( data.match("Credential successfully issued")) {
+                setUserActivity("Credential successfully issued")
+                setIsSuccess(true)
+            }else if (data.match("QR Code is scanned. Waiting for issuance to complete...")){
+                setIsSuccess(false)
+                setUserActivity(data)
+            }else {
+                setIsSuccess(false)
+                setUserActivity("")
+            }
         }
+        
     }
 
     useEffect(() => {

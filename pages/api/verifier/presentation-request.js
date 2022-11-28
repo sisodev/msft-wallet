@@ -20,6 +20,7 @@ export default async function  handler(req, res) {
             presentationConfig.authority = cfg["VerifierAuthority"]
             presentationConfig.requestedCredentials[0].acceptedIssuers[0] = cfg["IssuerAuthority"]
             presentationConfig.callback.url = `https://${hostname}/api/verifier/presentation-request-callback`;
+            presentationConfig.callback.state = uuidv4();
             const apiKey = uuidv4();
             presentationConfig.callback.headers['api-key'] = apiKey;
             const payload = JSON.stringify(presentationConfig);
@@ -33,8 +34,9 @@ export default async function  handler(req, res) {
                 }
               };
             const response = await fetch(verifier_api_request_endpoint, fetchOptions);
-            const resp = await response.json()
-            res.status(200).json(resp)
+            const resp = await response.json();
+            resp.state = presentationConfig.callback.state;
+            res.status(200).json(resp);
         }
     }
 }

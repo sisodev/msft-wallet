@@ -4,15 +4,25 @@ import { useEffect, useState } from "react";
 import VerificationCardOne from "../components/VerificationCardOne";
 import VerificationCardThree from "../components/VerificationCardThree";
 import VerificationCardTwo from "../components/VerificationCardTwo";
+import VerificationSuccess from "../components/VerificationSuccess";
 import styles from "../styles/Verification.module.css"
 // import {getSession} from  "../lib/get-session";
 
 function Verification({router, hostname}) {
     const [isVerified, setIsVerified] = useState(false)
+    const [isVerificationSuccess, setIsVerifictionSuccess] = useState(false)
     const name = router.query.name ? router.query.name.split(" ")[0] : ""
 
     const handleIsVerified = () =>{
         setIsVerified(!isVerified)
+    }
+
+    const setVerificationStatus = (status) => {
+        console.log("Verification success")
+        if(status.match("Verification complete") ){
+            setIsVerifictionSuccess(true)
+        }
+        
     }
 
     // useEffect(() => {
@@ -35,8 +45,9 @@ function Verification({router, hostname}) {
         <div className={styles.verification__cards}>
             <VerificationCardOne name={ router.query.name ? router.query.name : "John Doe"} verified={isVerified} changeIsVerified={handleIsVerified}/>
             <VerificationCardTwo verified={isVerified}/>
-            <VerificationCardThree verified={isVerified} hostname={hostname} />
+            <VerificationCardThree verified={isVerified} hostname={hostname} handlVerificationStatus={setVerificationStatus}/>
         </div>
+        {isVerificationSuccess ? <VerificationSuccess/> : ""}
         </>
     )
 }
