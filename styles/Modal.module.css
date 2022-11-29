@@ -21,11 +21,12 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    transform: translateY(-200px);
+    transform: translateY(-377px);
     transition: all 0.3s ease-in-out;
     width: 500px;
     border: 10x solid silver;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 99999;
 }
 
 .modal__header, .modal__footer {

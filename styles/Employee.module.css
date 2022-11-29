@@ -1,0 +1,165 @@
+/* .employee__page__wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}  */
+
+.employee__welcome__header {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.employee__verification__status {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    background: rgba(178, 176, 176, 0.5);
+    width: 100%;
+    height: 98%;
+    font-size: 25px;
+    font-weight: 800;
+    padding-bottom: 25px;
+}
+
+.employee__credential__status {
+    position: absolute;
+    padding-top: 80px;
+    
+}
+
+.employee__verification__status img {
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.employee__credential__status p {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.employee__info__wrapper {
+    display: flex;
+    flex: 1 2;
+    height: 500px;
+}
+
+.employee__info__sidenav {
+    min-width: 300px;
+    max-width: 300px;
+    background: #5a5a5a;
+}
+
+.employee__portal__info{
+    width: 100%;
+} 
+
+.employee__info__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 30px;
+    padding-left: 10px;
+}
+
+.employee__info__title {
+    text-align: center;
+    background: #d9d9d9;
+    padding: 5px 30px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+.employee__details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+}
+
+/* .employee__details .employee__data {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+} */
+.employee__data {
+    padding-bottom: 10px;
+}
+.employee__data  h3 {
+    color: lightgray;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.employee__data p {
+    color: white;
+    font-weight: 800;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.employee__portal__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.employee__portal__card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    height: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: white;
+}
+
+.employee__portal__welcome__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 70%;
+}
+
+.portal__welcome_msg {
+    padding-bottom: 20px;
+    padding-left: 12px;
+}
+
+
+
+.portal__welcome__info {
+    text-align: center;
+}
+
+.portal__nav__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.portal__nav__buttons .portal_buttons {
+    padding: 8px 10px;
+    color: black;
+    background: #d9d9d9;
+    text-align: center;
+    border: none;
+    min-width: 50px;
+    max-width: 200px;
+    border-radius: 5px;
+}

@@ -17,6 +17,7 @@ export default async function  handler(req, res) {
         res.status(200).json({"name": "Get Issuancce"})
     }else if(req.method === 'POST') {
         const {claims,hostname} = req.body
+        console.log(`the claims received at the backend are:: ${JSON.stringify(claims,null,2)}`)
         const result  = await cca.acquireTokenByClientCredential(msalClientCredentialRequest)
         if(result) {
             const {accessToken} = result;
@@ -30,10 +31,12 @@ export default async function  handler(req, res) {
             issuanceConfig.callback.headers['api-key'] = apiKey;
             issuanceConfig.pin.value = generatePin( issuanceConfig.pin.length );
             issuanceConfig.claims.given_name = claims.fname;
-            issuanceConfig.claims.family_name = claims.lname;
             issuanceConfig.claims.dateOfBirth = claims.dateOfBirth;
-            issuanceConfig.claims.passportNumber = claims.passportNumber;
-            issuanceConfig.claims.country = claims.country;
+            issuanceConfig.claims.emailAddress =claims.emailaddress;
+            issuanceConfig.claims.phoneNumber =claims.phoneno;
+            issuanceConfig.claims.domicile = claims.domicile;
+            issuanceConfig.claims.cooperateTitle=claims.cpttitle;
+            issuanceConfig.claims.privilegedSigner=claims.psignr;
             const payload = JSON.stringify(issuanceConfig);
             const option = {
                 method: 'POST',

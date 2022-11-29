@@ -1,17 +1,29 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "../styles/VerificationSuccess.module.css";
+import { useAppContext } from "../store/AppContext";
 
-export default function VerificationSuccess() {
+export default function VerificationSuccess({verificationId}) {
+
+
     const router = useRouter()
 
+    // const {verificationId} = useAppContext();
+    console.log(`verification id fetched from verification ${verificationId}`)
+
     const goForward = () => {
-        router.push("/employee")
+        console.log(`verification id fetched from verification ${verificationId}`)
+        router.push({
+            pathname: '/employee',
+            query: { verificationId }
+        });
     }
 
     const returnHome = () => {
         router.push("/landing")
     }
+
+
     return(
         <div className={styles.verification__success__wrapper}>
             <div className={styles.verification__success__container}>

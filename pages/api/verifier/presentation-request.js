@@ -13,6 +13,7 @@ export default async function  handler(req, res) {
     
     if(req.method === 'POST') {
         const {hostname} = req.body
+        console.log(`the hostname is ${hostname} in presentatin request API`)
         const result  = await cca.acquireTokenByClientCredential(msalClientCredentialRequest)
         if(result) {
             const accessToken = result.accessToken;

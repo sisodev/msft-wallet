@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 import IssuanceSuccess from "../../components/IssuanceSuccess";
 
-
+// const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function IssuanceSave({router}) {
     const {url, pin, state, fullname}= router.query;
@@ -21,20 +21,22 @@ function IssuanceSave({router}) {
             if( data.match("Credential successfully issued")) {
                 setUserActivity("Credential successfully issued")
                 setIsSuccess(true)
+                return
             }else if (data.match("QR Code is scanned. Waiting for issuance to complete...")){
                 setIsSuccess(false)
                 setUserActivity(data)
+                setTimeout(() => polling(),2500)
             }else {
                 setIsSuccess(false)
                 setUserActivity("")
+                setTimeout(() => polling(),2500)
             }
         }
         
     }
 
     useEffect(() => {
-      const poolingId =   setInterval(() => polling(),2500)
-      return () => clearInterval(poolingId)
+        polling()
     },[])
 
 

@@ -1,30 +1,30 @@
-export const presentationConfig = {
-    "includeQRCode": false,
-    "callback": {
-      "url": "https://YOURPUBLICREACHABLEHOSTNAME/api/verifier/presentationCallback",
-      "state": "STATEWILLBESETINCODE",
-      "headers": {
-        "api-key": "OPTIONAL API-KEY for VERIFIER CALLBACK API"
-      }
-    },
-    "authority": "did:ion: THIS IS YOUR DID FROM THE VC PAGE IN AZURE PORTAL WHICH IS SET IN THE SAMPLE BY COPYING THE VALUE FROM CONFIG.JSON   ",
-    "registration": {
-      "clientName": "Veriable Credential Expert Verifier",
-      "purpose": "So we can see that you a veriable credentials expert"
-    },
-    
-    "includeReceipt": false,
-    "requestedCredentials": [
-      {
-        "type": "VerifiedPrivilegedSigner",
-        "purpose": "So we can see that you a veriable credentials expert",
-        "acceptedIssuers": [ "did:ion: copied from your VC portal in this sample the code copies it from CONFIG.JSON" ]
-      }
-    ],
-    "configuration": {
-      "validation": {
-        "allowRevoked": true,
-        "validateLinkedDomain": true
-      }
+export const presentationConfig ={
+  "includeQRCode": false,
+  "callback": {
+    "url": "https://YOURPUBLICREACHABLEHOSTNAME/api/verifier/presentationCallback",
+    "state": "STATEWILLBESETINCODE",
+    "headers": {
+      "api-key": "OPTIONAL API-KEY for VERIFIER CALLBACK API"
+    }
+  },
+  "authority": "did:ion: THIS IS YOUR DID FROM THE VC PAGE IN AZURE PORTAL WHICH IS SET IN THE SAMPLE BY COPYING THE VALUE FROM CONFIG.JSON   ",
+  "registration": {
+    "clientName": "Veriable Credential Expert Verifier",
+    "purpose": "So we can see that you a veriable credentials expert"
+  },
+  
+  "includeReceipt": false,
+  "requestedCredentials": [
+    {
+      "type": "VerifiedPrivilegedSigner",
+      "purpose": "So we can see that you a veriable credentials expert",
+      "acceptedIssuers": [ "did:ion: copied from your VC portal in this sample the code copies it from CONFIG.JSON" ]
+    }
+  ],
+  "configuration": {
+    "validation": {
+      "allowRevoked": true,
+      "validateLinkedDomain": false
     }
   }
+}

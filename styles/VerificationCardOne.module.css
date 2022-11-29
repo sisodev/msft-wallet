@@ -8,12 +8,13 @@
     border-radius: 8px;
     padding: 50px 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    min-width: 300px;
+    max-width: 350px;
+    min-width: 350px;
     min-height: 450px; 
 }
 
 .step__number {
-    background-color: rgb(62, 159, 62);
+    background-color: #00a2ed;
     width:50px;
     color: white;
     text-align: center;
@@ -29,25 +30,35 @@
 .verification__head h2 {
     line-height: 28px;
     font-weight: bolder;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
 }
 
 .step__desc {
     margin-bottom: 20px;
+    /* overflow-wrap: break-word; */
 }
 
 .step__desc p{
     font-weight: 20;
+    text-align: center;
 }
 
 .verification__button button{
     background: white;
-    padding: 10px 40px;
+    padding: 10px 60px;
     text-align: center;
-    border: 2px solid black;
+    border: none;
     cursor: pointer;
     border-radius: 30px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 20px;
+    background: #00a2ed;
+}
+
+.verification__button button:disabled, .verification__button button[disabled] {
+    background-color: grey;
 }
 
 .verified__button button {
@@ -56,4 +67,11 @@
     text-align: center;
     background: white;
     cursor: pointer;
+}
+
+.verified__btn__message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
 }

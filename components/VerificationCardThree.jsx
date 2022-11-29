@@ -1,44 +1,28 @@
 import {QRCodeSVG} from 'qrcode.react';
-import { useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons'
+
+
 import styles from "../styles/VerificationCardThree.module.css"
+import Loader from './Loader';
 
 
 
-export default function VerificationCardThree({verified, hostname, handlVerificationStatus}) {
+
+export default function VerificationCardThree({hostname, verified, setIsVerificationSuccess,setverificationId}) {
+    
     const [scanIns, setScanIns] = useState(false)
-    // const [isloading, setIsLoading] = useState(false)
     const [userActivity, setUserActivity] = useState("")
-    const [presentationResponse, setPresentationResponse] =  useState({url: "", requestId: "", expiry: "", state: ""})
-    const [success, setIsSuccess] = useState(false)
+    const [verificationResponse, setVerificationResponse] = useState({url: "", requestId: "", expiry: "", state: ""})
 
-
-
-
-    useEffect(() => {
-        if(success) {
-            handlVerificationStatus("Verification complete")
-            setIsSuccess(true)
-        }
-    }, [success])
-
-    const polling = async (status) => {
-            console.log(`the status id is ${status}`)
-            const resp = await fetch(`/api/verifier/presentation-request-callback-polling?state=${status}`)
-            const data = await resp.text()
-            console.log(data)
-            if (data === "Verification complete"){
-                console.log("verification is completed")
-                 setIsSuccess(true)
-                 setUserActivity(data)             
-                 console.log("show now show pop up")
-            }else {
-                console.log("verification pending...")
-                setIsSuccess(false)
-                setUserActivity(data)
-            }
+    const handleVerificationData = (data) => {
+        console.log(`got verification request data ::: ${JSON.stringify(data,null,2)}`)
+        const {url, expiry, state, requestId} = data
+        setVerificationResponse((prev) => ({...prev, url,expiry,state,requestId}))
     }
+
+
 
     const fetchPresentationRequest = async () => {
         setScanIns(!scanIns)
@@ -53,18 +37,38 @@ export default function VerificationCardThree({verified, hostname, handlVerifica
         try{
             const response = await fetch('api/verifier/presentation-request',fetchOptions)
             const data = await response.json()
+            setverificationId(data.state)
             console.log(`response from presentation request : ${JSON.stringify(data,null,2)}`)
-            setPresentationResponse(data)
-            intervalID = setInterval(() => polling(data.state), 2500)
-            if(success) {
-                clearInterval(intervalID)
-            }
+            handleVerificationData(data)
         }catch(e) {
             console.error(e)
         }
     }
 
-    
+    const polling = async () => {
+        if(verificationResponse.state !== "") {
+            try {
+                const resp = await fetch(`/api/verifier/presentation-request-callback-polling?state=${verificationResponse.state}`)
+                const data = await resp.text()
+                if (data === "Verification complete"){
+                    setUserActivity(data)
+                    setIsVerificationSuccess(true)             
+               }else {
+                    setUserActivity(data)
+                    setTimeout(() => polling(),2500)
+               }
+            }catch(e){
+                console.log(err)
+                setTimeout(() => polling(),2500)
+            }  
+        }   
+    }
+
+    useEffect(() => {
+        polling()
+    }, [verificationResponse.state])
+
+   
 
     return(
         
@@ -76,9 +80,9 @@ export default function VerificationCardThree({verified, hostname, handlVerifica
             </div>
             <div className={styles.verification__explanation}>
                 <div className={styles.verification__head}>
-                    <h2>{scanIns ? "Scan the QR code" : "Access the"}</h2>
-                    <h2>{scanIns ? "With the Microsoft": "personalized"}</h2>
-                    <h2>{scanIns ? "Authenticator app":"employee portal"}</h2>
+                    <h2>{scanIns ? "Scan the QR code" : "Access the personalized portal to use"}</h2>
+                    <h2>{scanIns ? "With the Microsoft": "your privileges"}</h2>
+                    <h2>{scanIns ? "Authenticator app":""}</h2>
                 </div>
                 <div className={styles.step__desc}>
                     {scanIns ? <p>In the app, <b>open</b> the Verified ID tab</p>:<p>You will need a Verifiable</p>}
@@ -87,9 +91,8 @@ export default function VerificationCardThree({verified, hostname, handlVerifica
                 </div>
             </div>
             { userActivity !== "" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""}
-            {success ?  () => handlVerificationStatus("Verification complete"): ""}
             {scanIns ? <div className={styles.verification__qr__code}> 
-                   { presentationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> :  <QRCodeSVG value={presentationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
+                   { verificationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> : userActivity === "QR Code is scanned." ? <Loader/> : <QRCodeSVG value={verificationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
                             <button onClick={fetchPresentationRequest}><FontAwesomeIcon icon={faFileSignature} /> Access Personalized portal</button>
             </div>}
     </div>

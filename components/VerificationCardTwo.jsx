@@ -7,13 +7,11 @@ export default function VerificationCardTwo({verified}) {
             <div className={styles.step__number}><h3>2</h3></div>
             <div className={styles.verification__explanation}>
                 <div className={styles.verification__head}>
-                    <h2>Confirm you have</h2>
-                    <h2>your True Identity</h2>
-                    <h2>card</h2>
+                    <h2>Confirm you have your Microsoft</h2>
+                    <h2>Treasury credential</h2>
                 </div>
                 <div className={styles.step__desc}>
-                    <p>If this looks familiar, you are ready</p>
-                    <p>to continue to step three.</p>
+                    <p>If this looks familiar, you are ready to continue to step 3</p>
                 </div>
             </div>
             <div className={styles.verification__card}>

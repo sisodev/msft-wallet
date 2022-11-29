@@ -2,13 +2,13 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import styles from "../styles/IssuerForm.module.css"
-import Modal from "./Modal"
+import Modal from "./Modal";
 
 export default function IssuerForm({name : fullname, host}) {
 
-    const router = useRouter()
+    const router = useRouter();
 
-    const [claims, setClaims] = useState(null)
+    const [claims, setClaims] = useState({cpttitle: "Mr", phoneno: "333333333"})
     const [issuanceResponse, setIssuanceResponse] = useState(null)
     const [show,setShow] = useState(false)
     const [modalMessage, setModalMessage] = useState("Verifying")
@@ -19,6 +19,7 @@ export default function IssuerForm({name : fullname, host}) {
             ...prevState,
             [name]: value
         }));
+        console.log(`${JSON.stringify(claims,null,2)}`)
     }
 
     const modalCloseHandler = () => {
@@ -35,7 +36,7 @@ export default function IssuerForm({name : fullname, host}) {
     }
 
     const submitHandler = async () => {
-        if(claims.fname && claims.lname && claims.dateOfBirth && claims.passportNumber) {
+        if(claims.fname && claims.domicile && claims.dateOfBirth && claims.emailaddress && claims.psignr) {
 
             const fetchOptions = {
                 method: 'POST',
@@ -66,37 +67,44 @@ export default function IssuerForm({name : fullname, host}) {
             <div className={styles.issuer__form_field__groups}>
                 <div className={styles.issuer__form__name__fields}>
                     <div className={styles.form__group}>
-                        <label htmlFor="fname"><p>First Name*</p></label>
+                        <label htmlFor="fname"><p>Name</p></label>
                         <input onChange={changeHandler} type="text" name="fname" id="fname" required/>
                     </div>
                     <div className={styles.form__group}>
-                        <label htmlFor="lname"><p>Last Name*</p></label>
-                        <input onChange={changeHandler} type="text" name="lname" id="lname" required/>
+                            <label htmlFor="dateOfBirth"><p>Date of birth</p></label>
+                            <input onChange={changeHandler} type="text" name="dateOfBirth" id="dateOfBirth" required/>
+                    </div>
+                    <div className={styles.form__group}>
+                            <label htmlFor="emailaddress"><p>Email address</p></label>
+                            <input onChange={changeHandler} type="text" name="emailaddress" id="emailaddress" required/>
                     </div>
                 </div>
                 <div className={styles.issuer__form__dob__photo}>
-                    <div className={styles.issuer__form__dob__passport}>
                         <div className={styles.form__group}>
-                            <label htmlFor="dateOfBirth"><p>Date of birth*</p></label>
-                            <input onChange={changeHandler} type="text" name="dateOfBirth" id="dateOfBirth" required/>
+                            <label htmlFor="domicile"><p>Where are you domiciled?</p></label>
+                            <input onChange={changeHandler} type="text" name="domicile" id="domicile" required/>
+                        </div>
+                        <div className={styles.form__group__radio}>
+                        <p style={{color: "rgb(87, 87, 87)", paddingLeft: "15px"}}> Are you a priviliged signer?</p><br/>
+                            <div className={styles.radio__group}>
+                                <div className={styles.border_element_one}></div><input onChange={changeHandler} type="radio" id="html" name="psignr" value="Yes"/>
+                                <label htmlFor="html">No</label>
+                                <div className={styles.border_element_two}></div><input onChange={changeHandler} type="radio" id="css" name="psignr" value="No"/>
+                                <label htmlFor="css">Yes</label>
+                            </div>
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor="passportNumber"><p>Passport number*</p></label>
-                            <input onChange={changeHandler} type="text" name="passportNumber" id="passportNumber" required/>
+                            <label htmlFor="img">Select image:</label>
+                            <input className={styles.file__input} type="file" id="img" name="img" accept="image/*"/>
                         </div>
-                        <div className={styles.form__group}>
-                            <label htmlFor="country"><p>Country*</p></label>
-                            <input onChange={changeHandler} type="text" name="country" id="country" required/>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div className={styles.issuer__action__btn}>
-                <button className={styles.issuer_btn}> Go Back</button>
-                <button className={styles.issuer_btn} onClick={submitHandler}> Submit</button>
+                    <button className={styles.issuer_btn}>Back</button>
+                    <button className={styles.issuer_btn} onClick={submitHandler}>Submit</button>
             </div>
-
         </div>
+        
             <Modal title={modalMessage} onClose={modalCloseHandler} show={show}>
                <Image src="/verify_md_fast.gif" alt="progress" width={250} height={250} />
             </Modal>

@@ -9,7 +9,8 @@
     padding: 5px 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     gap: 5px;
-    min-width: 300px;
+    max-width: 350px;
+    min-width: 350px;
     min-height: 450px; 
 }
 
@@ -31,7 +32,7 @@
 
 
 .step__number {
-    background-color: rgb(62, 159, 62);
+    background-color: #00a2ed;
     width:50px;
     color: white;
     text-align: center;
@@ -50,16 +51,21 @@
     margin-bottom: 20px;
 }
 .verification__head h2 {
-    font-weight: bold;
+    line-height: 28px;
+    font-weight: bolder;
     font-size: 20px;
+    font-weight: 500;
+    text-align: center;
 }
 
 .step__desc {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .step__desc p{
     font-weight: 20;
+    text-align: center;
 }
 
 .verification__qr__code {
@@ -75,14 +81,17 @@
 }
 
 .verification__button button{
-    background: white;
+    background: #00a2ed;
     padding: 10px 40px;
     text-align: center;
-    border: 2px solid black;
     cursor: pointer;
     border-radius: 30px;
     font-weight: 600;
     margin-bottom: 70px;
+    margin-left: 20px;
+    color: white;
+    border: none;
+
 }
 
 .verification__message p {
