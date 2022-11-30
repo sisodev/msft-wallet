@@ -15,6 +15,8 @@ function Verification({router, hostname}) {
     const [isVerified, setIsVerified] = useState(false)
     const[verificationId, setverificationId] = useState("")
     const [isVerificationSuccess, setIsVerificationSuccess] = useState(false)
+    const {fullname} = useAppContext();
+    console.log(`the fullname received is ${fullname}`)
     const name = router.query.name ? router.query.name.split(" ")[0] : "";
 
    
@@ -28,10 +30,10 @@ function Verification({router, hostname}) {
         <>
         <div className={styles.verification__container}>
             <div className={styles.verification_banner}>
-                <Image src="/verification_header_banner.png" lat="banner" width={1500} height={190} />
+                <Image src="/verification_header_banner.png" alt="banner" width={1500} height={190} />
             </div>
             <div className={styles.verification__welcome}>
-                <h2>Hi {name},</h2>
+                <h2>Hi {fullname.indexOf(" ") === -1 ? fullname : fullname.split(" ")[0]},</h2>
                 <h2>Lets create your digital credential</h2>
             </div>
         </div>

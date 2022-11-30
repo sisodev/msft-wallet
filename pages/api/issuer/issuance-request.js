@@ -16,7 +16,7 @@ export default async function  handler(req, res) {
     if(req.method === 'GET') {
         res.status(200).json({"name": "Get Issuancce"})
     }else if(req.method === 'POST') {
-        const {claims,hostname} = req.body
+        const {claims,hostname,selectedImage} = req.body
         console.log(`the claims received at the backend are:: ${JSON.stringify(claims,null,2)}`)
         const result  = await cca.acquireTokenByClientCredential(msalClientCredentialRequest)
         if(result) {
@@ -37,6 +37,7 @@ export default async function  handler(req, res) {
             issuanceConfig.claims.domicile = claims.domicile;
             issuanceConfig.claims.cooperateTitle=claims.cpttitle;
             issuanceConfig.claims.privilegedSigner=claims.psignr;
+            issuanceConfig.claims.photo = encodeURI(selectedImage);
             const payload = JSON.stringify(issuanceConfig);
             const option = {
                 method: 'POST',

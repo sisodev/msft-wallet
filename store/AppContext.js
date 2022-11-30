@@ -4,10 +4,10 @@ import { createContext, useContext } from 'react';
 export const AppContext = createContext();
 
 export const AppWrapper = ({children}) => {
-
+    const [fullname, setFullname] = useState("")
     const [verificationId, setVerificationId] = useState("");
     const [issuanceId, setIssuanceId] = useState("");
-    let state = {verificationId: "", issuanceId: "", setVerificationId, setIssuanceId}
+    let state = {verificationId, issuanceId, fullname, setFullname, setVerificationId, setIssuanceId}
    
 
     return(

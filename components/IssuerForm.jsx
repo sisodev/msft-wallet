@@ -2,6 +2,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import styles from "../styles/IssuerForm.module.css"
+import ImageUpload from "./ImageUpload";
 import Modal from "./Modal";
 
 export default function IssuerForm({name : fullname, host}) {
@@ -12,6 +13,7 @@ export default function IssuerForm({name : fullname, host}) {
     const [issuanceResponse, setIssuanceResponse] = useState(null)
     const [show,setShow] = useState(false)
     const [modalMessage, setModalMessage] = useState("Verifying")
+    const [selectedImage, setSelectedImage] = useState("")
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -20,6 +22,16 @@ export default function IssuerForm({name : fullname, host}) {
             [name]: value
         }));
         console.log(`${JSON.stringify(claims,null,2)}`)
+    }
+
+    const onFileChange = (e) =>{
+        let files = e.target.files;
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(files[0]);
+
+        fileReader.onload = (event) =>{
+            setSelectedImage(event.target.result)
+        }
     }
 
     const modalCloseHandler = () => {
@@ -36,11 +48,11 @@ export default function IssuerForm({name : fullname, host}) {
     }
 
     const submitHandler = async () => {
-        if(claims.fname && claims.domicile && claims.dateOfBirth && claims.emailaddress && claims.psignr) {
+        if(claims.fname && claims.domicile && claims.dateOfBirth && claims.emailaddress && claims.psignr && selectedImage) {
 
             const fetchOptions = {
                 method: 'POST',
-                body: JSON.stringify({claims,hostname: host}),
+                body: JSON.stringify({claims,hostname: host,selectedImage }),
                 headers: {
                 'Content-Type': 'application/json',
                 }
@@ -93,10 +105,11 @@ export default function IssuerForm({name : fullname, host}) {
                                 <label htmlFor="css">Yes</label>
                             </div>
                         </div>
-                        <div className={styles.form__group}>
+                        {/* <div className={styles.form__group}>
                             <label htmlFor="img">Select image:</label>
                             <input className={styles.file__input} type="file" id="img" name="img" accept="image/*"/>
-                        </div>
+                        </div> */}
+                        <ImageUpload onFileChange={onFileChange}/>
                 </div>
             </div>
             <div className={styles.issuer__action__btn}>

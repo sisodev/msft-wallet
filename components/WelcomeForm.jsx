@@ -1,23 +1,35 @@
 import styles from "../styles/WelcomeForm.module.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router";
+import { useAppContext } from "../store/AppContext";
 
 export default function WelcomeForm() {
-    const [fullname, setName] = useState({firstname: "Matthew", lastname: "Michael"})
+    const [username, setUserName] = useState({firstname: "Matthew", lastname: "Michael"})
     const router = useRouter();
+
+    const {setFullname} = useAppContext()
 
     const handleChange = e => {
         const { name, value } = e.target;
-        setName(prevState => ({
+        console.log(`are we setting name`)
+        setUserName(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
 
+    useEffect(() => {
+        setFullname(`${username.firstname} ${username.lastname}`)
+    }, [])
+
+    useEffect(() => {
+        setFullname(`${username.firstname} ${username.lastname}`)
+    }, [username])
+
     const handleSubmit = () => {
         router.push({
             pathname: '/verification',
-            query: { name: `${fullname.firstname} ${fullname.lastname}` }
+            query: { name: `${username.firstname} ${username.lastname}` }
         }, '/verification');
     }
 
@@ -42,12 +54,12 @@ export default function WelcomeForm() {
             <div className={styles.form_form}>
                 <div className={styles.form__group}>
                     <label htmlFor="">First Name:</label>
-                    <input type="text" name="firstname" value={fullname.firstname} onChange={handleChange} className={styles.form__control} required />
+                    <input type="text" name="firstname" value={username.firstname} onChange={handleChange} className={styles.form__control} required />
                 </div>
                 <br/>
                 <div className={styles.form__group}>
                     <label htmlFor="">Last Name:</label>
-                    <input value={fullname.lastname} name="lastname" onChange={handleChange} type="text" className={styles.form__control} required />
+                    <input value={username.lastname} name="lastname" onChange={handleChange} type="text" className={styles.form__control} required />
                 </div>
                 <button onClick={handleSubmit} className={`${styles.button} ${styles.form__button}`}>Next &rarr;</button>
             </div>
