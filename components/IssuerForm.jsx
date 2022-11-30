@@ -30,7 +30,7 @@ export default function IssuerForm({name : fullname, host}) {
         fileReader.readAsDataURL(files[0]);
 
         fileReader.onload = (event) =>{
-            setSelectedImage(event.target.result)
+            setSelectedImage(event.target.result.split(",")[1])
         }
     }
 

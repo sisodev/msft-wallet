@@ -37,7 +37,7 @@ export default async function  handler(req, res) {
             issuanceConfig.claims.domicile = claims.domicile;
             issuanceConfig.claims.cooperateTitle=claims.cpttitle;
             issuanceConfig.claims.privilegedSigner=claims.psignr;
-            issuanceConfig.claims.photo = encodeURI(selectedImage);
+            issuanceConfig.claims.photo = selectedImage;
             const payload = JSON.stringify(issuanceConfig);
             const option = {
                 method: 'POST',
