@@ -1,5 +1,5 @@
 .modal__show {
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -16,6 +16,7 @@
 }
 
 .modal__content {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,6 +27,7 @@
     width: 500px;
     border: 10x solid silver;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: translate(-46%, -209%);
     z-index: 99999;
 }
 
@@ -39,6 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 60px;
 }
 
 .modal__title {

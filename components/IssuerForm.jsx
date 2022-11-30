@@ -1,15 +1,17 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import { useAppContext } from "../store/AppContext";
 import styles from "../styles/IssuerForm.module.css"
 import ImageUpload from "./ImageUpload";
 import Modal from "./Modal";
 
-export default function IssuerForm({name : fullname, host}) {
+export default function IssuerForm({host}) {
 
     const router = useRouter();
+    const {fullname} = useAppContext();
 
-    const [claims, setClaims] = useState({cpttitle: "Mr", phoneno: "333333333"})
+    const [claims, setClaims] = useState({fname: fullname, cpttitle: "Mr", phoneno: "333333333", })
     const [issuanceResponse, setIssuanceResponse] = useState(null)
     const [show,setShow] = useState(false)
     const [modalMessage, setModalMessage] = useState("Verifying")
@@ -47,6 +49,10 @@ export default function IssuerForm({name : fullname, host}) {
         }, "/issuance/save")
     }
 
+   const goBack = () => {
+    router.push("/verification")
+   }
+
     const submitHandler = async () => {
         if(claims.fname && claims.domicile && claims.dateOfBirth && claims.emailaddress && claims.psignr && selectedImage) {
 
@@ -80,7 +86,7 @@ export default function IssuerForm({name : fullname, host}) {
                 <div className={styles.issuer__form__name__fields}>
                     <div className={styles.form__group}>
                         <label htmlFor="fname"><p>Name</p></label>
-                        <input onChange={changeHandler} type="text" name="fname" id="fname" required/>
+                        <input onChange={changeHandler} value={fullname} type="text" name="fname" id="fname" required/>
                     </div>
                     <div className={styles.form__group}>
                             <label htmlFor="dateOfBirth"><p>Date of birth</p></label>
@@ -99,9 +105,9 @@ export default function IssuerForm({name : fullname, host}) {
                         <div className={styles.form__group__radio}>
                         <p style={{color: "rgb(87, 87, 87)", paddingLeft: "15px"}}> Are you a priviliged signer?</p><br/>
                             <div className={styles.radio__group}>
-                                <div className={styles.border_element_one}></div><input onChange={changeHandler} type="radio" id="html" name="psignr" value="Yes"/>
+                                <div className={styles.border_element_one}></div><input onChange={changeHandler} type="radio" id="html" name="psignr" value="No"/>
                                 <label htmlFor="html">No</label>
-                                <div className={styles.border_element_two}></div><input onChange={changeHandler} type="radio" id="css" name="psignr" value="No"/>
+                                <div className={styles.border_element_two}></div><input onChange={changeHandler} type="radio" id="css" name="psignr" value="Yes"/>
                                 <label htmlFor="css">Yes</label>
                             </div>
                         </div>
@@ -113,7 +119,7 @@ export default function IssuerForm({name : fullname, host}) {
                 </div>
             </div>
             <div className={styles.issuer__action__btn}>
-                    <button className={styles.issuer_btn}>Back</button>
+                    <button className={styles.issuer_btn} onClick={goBack}>Back</button>
                     <button className={styles.issuer_btn} onClick={submitHandler}>Submit</button>
             </div>
         </div>

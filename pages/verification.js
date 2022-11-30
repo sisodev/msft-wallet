@@ -11,19 +11,25 @@ import styles from "../styles/Verification.module.css"
 
 // import {getSession} from  "../lib/get-session";
 
-function Verification({router, hostname}) {
+function Verification({hostname}) {
     const [isVerified, setIsVerified] = useState(false)
     const[verificationId, setverificationId] = useState("")
     const [isVerificationSuccess, setIsVerificationSuccess] = useState(false)
-    const {fullname} = useAppContext();
-    console.log(`the fullname received is ${fullname}`)
-    const name = router.query.name ? router.query.name.split(" ")[0] : "";
+    const {fullname, issuanceId, setHostname} = useAppContext();
 
-   
+    useEffect(() => {
+        setHostname(hostname)
+    },[])
 
     const handleIsVerified = () =>{
         setIsVerified(!isVerified)
     }
+
+    useEffect(() => {
+        if(issuanceId !== "") {
+            setIsVerified(true)
+        } 
+    }, [issuanceId])
 
 
     return(
@@ -38,9 +44,9 @@ function Verification({router, hostname}) {
             </div>
         </div>
         <div className={styles.verification__cards}>
-            <VerificationCardOne name={ router.query.name ? router.query.name : "John Doe"} verified={isVerified} changeIsVerified={handleIsVerified}/>
+            <VerificationCardOne verified={isVerified} changeIsVerified={handleIsVerified}/>
             <VerificationCardTwo verified={isVerified}/>
-            <VerificationCardThree hostname={hostname} verified={isVerified} setIsVerificationSuccess={setIsVerificationSuccess} setverificationId={setverificationId}/>
+            <VerificationCardThree verified={isVerified} setIsVerificationSuccess={setIsVerificationSuccess} setverificationId={setverificationId}/>
         </div>
           {isVerificationSuccess ? <VerificationSuccess verificationId={verificationId}/> : ""}
         </>

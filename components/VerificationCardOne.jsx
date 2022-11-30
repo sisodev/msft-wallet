@@ -2,14 +2,13 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "../styles/VerificationCardOne.module.css";
 
-export default function VerificationCardOne({name, verified, changeIsVerified}) {
+export default function VerificationCardOne({verified, changeIsVerified}) {
     
     const router = useRouter();
 
     const clickHandler = () => {
         router.push({
             pathname: "/issuer",
-            query: {name}
         }, '/issuer')
     }
 

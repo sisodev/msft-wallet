@@ -5,6 +5,7 @@ import { useAppContext } from "../store/AppContext";
 
 export default function WelcomeForm() {
     const [username, setUserName] = useState({firstname: "Matthew", lastname: "Michael"})
+    const [disable, setDisable] = useState(false)
     const router = useRouter();
 
     const {setFullname} = useAppContext()
@@ -27,9 +28,9 @@ export default function WelcomeForm() {
     }, [username])
 
     const handleSubmit = () => {
+        setDisable(true)
         router.push({
             pathname: '/verification',
-            query: { name: `${username.firstname} ${username.lastname}` }
         }, '/verification');
     }
 
@@ -61,7 +62,7 @@ export default function WelcomeForm() {
                     <label htmlFor="">Last Name:</label>
                     <input value={username.lastname} name="lastname" onChange={handleChange} type="text" className={styles.form__control} required />
                 </div>
-                <button onClick={handleSubmit} className={`${styles.button} ${styles.form__button}`}>Next &rarr;</button>
+                <button disabled={disable} onClick={handleSubmit} className={`${styles.button} ${styles.form__button}`}>Next &rarr;</button>
             </div>
         </div>
     )

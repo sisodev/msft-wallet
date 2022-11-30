@@ -15,7 +15,7 @@ export default function Modal(props) {
                     {props.children}
                 </div>
                 <div className={styles.modal__footer}>
-                    <button onClick={props.onClose} className={styles.modal__button}>Close</button>
+                   {props.title ==="Verification Complete" ?  <button onClick={props.onClose} className={styles.modal__button}>Close</button> : "" } 
                 </div>
             </div>
         </div>

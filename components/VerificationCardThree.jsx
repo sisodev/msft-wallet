@@ -6,11 +6,14 @@ import { faFileSignature } from '@fortawesome/free-solid-svg-icons'
 
 import styles from "../styles/VerificationCardThree.module.css"
 import Loader from './Loader';
+import { useAppContext } from '../store/AppContext';
 
 
 
 
-export default function VerificationCardThree({hostname, verified, setIsVerificationSuccess,setverificationId}) {
+export default function VerificationCardThree({verified, setIsVerificationSuccess,setverificationId}) {
+
+    const {hostname} = useAppContext();
     
     const [scanIns, setScanIns] = useState(false)
     const [userActivity, setUserActivity] = useState("")

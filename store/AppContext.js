@@ -7,7 +7,8 @@ export const AppWrapper = ({children}) => {
     const [fullname, setFullname] = useState("")
     const [verificationId, setVerificationId] = useState("");
     const [issuanceId, setIssuanceId] = useState("");
-    let state = {verificationId, issuanceId, fullname, setFullname, setVerificationId, setIssuanceId}
+    const [hostname, setHostname] = useState("");
+    let state = {verificationId, issuanceId, fullname, hostname, setFullname, setVerificationId, setIssuanceId, setHostname}
    
 
     return(

@@ -46,7 +46,6 @@
 }
 
 .verification__button button{
-    background: white;
     padding: 10px 60px;
     text-align: center;
     border: none;
@@ -55,10 +54,17 @@
     font-weight: 700;
     margin-bottom: 20px;
     background: #00a2ed;
+    transition: all 0.3s ease-in;
 }
+
+/* .verification__button button:hover{
+    background: white;
+    cursor: pointer;
+} */
 
 .verification__button button:disabled, .verification__button button[disabled] {
     background-color: grey;
+    cursor: none;
 }
 
 .verified__button button {

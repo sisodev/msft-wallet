@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import IssuanceSuccess from "../../components/IssuanceSuccess";
+import { useAppContext } from "../../store/AppContext";
 
 // const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -14,6 +15,8 @@ function IssuanceSave({router}) {
     const [userActivity, setUserActivity] = useState("")
     const [success, setIsSuccess] = useState(false)
 
+    const {setIssuanceId} = useAppContext()
+
     const polling = async () => {
         if(state !== null || state !== "") {
             const resp = await fetch(`/api/issuer/issuance-request-callback-polling?state=${state}`)
@@ -21,6 +24,7 @@ function IssuanceSave({router}) {
             if( data.match("Credential successfully issued")) {
                 setUserActivity("Credential successfully issued")
                 setIsSuccess(true)
+                setIssuanceId(state)
                 return
             }else if (data.match("QR Code is scanned. Waiting for issuance to complete...")){
                 setIsSuccess(false)
