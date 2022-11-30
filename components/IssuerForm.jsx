@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppContext } from "../store/AppContext";
 import styles from "../styles/IssuerForm.module.css"
 import ImageUpload from "./ImageUpload";
@@ -9,13 +9,18 @@ import Modal from "./Modal";
 export default function IssuerForm({host}) {
 
     const router = useRouter();
-    const {fullname} = useAppContext();
+    const {fullname, setFullname} = useAppContext();
 
     const [claims, setClaims] = useState({fname: fullname, cpttitle: "Mr", phoneno: "333333333", })
     const [issuanceResponse, setIssuanceResponse] = useState(null)
     const [show,setShow] = useState(false)
     const [modalMessage, setModalMessage] = useState("Verifying")
     const [selectedImage, setSelectedImage] = useState("")
+
+
+    useEffect(() => {
+        setFullname(claims.fname)
+    },[claims.fname])
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -37,10 +42,6 @@ export default function IssuerForm({host}) {
     }
 
     const modalCloseHandler = () => {
-        // setShow(false)
-        //console.log(JSON.stringify(issuanceResponse))
-        //const issuanceResponse = {"requestId":"13b8891f-3811-4d3e-8d78-7ccc9f340209","url":"openid-vc://?request_uri=https://beta.did.msidentity.com/v1.0/tenants/fe83c546-e3ca-4d22-9fbf-10cb709424b1/verifiableCredentials/issuanceRequests/13b8891f-3811-4d3e-8d78-7ccc9f340209","expiry":1669264671,"pin":"1655"}
-        // console.log("navigating...")
         const {url, pin, state} = issuanceResponse;
         console.log(`the namespace is ${state}`)
         router.push({
@@ -86,7 +87,7 @@ export default function IssuerForm({host}) {
                 <div className={styles.issuer__form__name__fields}>
                     <div className={styles.form__group}>
                         <label htmlFor="fname"><p>Name</p></label>
-                        <input onChange={changeHandler} value={fullname} type="text" name="fname" id="fname" required/>
+                        <input onChange={changeHandler}  type="text" name="fname" id="fname" required/>
                     </div>
                     <div className={styles.form__group}>
                             <label htmlFor="dateOfBirth"><p>Date of birth</p></label>

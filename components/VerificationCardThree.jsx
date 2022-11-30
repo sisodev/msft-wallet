@@ -93,7 +93,7 @@ export default function VerificationCardThree({verified, setIsVerificationSucces
                     {scanIns ? "":<p>Authenticator to access.</p>}
                 </div>
             </div>
-            { userActivity !== "" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""}
+            { userActivity !== "" && userActivity !== "pending" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""}
             {scanIns ? <div className={styles.verification__qr__code}> 
                    { verificationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> : userActivity === "QR Code is scanned." ? <Loader/> : <QRCodeSVG value={verificationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
                             <button onClick={fetchPresentationRequest}><FontAwesomeIcon icon={faFileSignature} /> Access Personalized portal</button>

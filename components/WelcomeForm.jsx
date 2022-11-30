@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router";
 import { useAppContext } from "../store/AppContext";
 
+
+
 export default function WelcomeForm() {
     const [username, setUserName] = useState({firstname: "Matthew", lastname: "Michael"})
     const [disable, setDisable] = useState(false)
@@ -12,12 +14,12 @@ export default function WelcomeForm() {
 
     const handleChange = e => {
         const { name, value } = e.target;
-        console.log(`are we setting name`)
         setUserName(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
+
 
     useEffect(() => {
         setFullname(`${username.firstname} ${username.lastname}`)
