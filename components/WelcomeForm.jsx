@@ -26,7 +26,13 @@ export default function WelcomeForm() {
     }, [])
 
     useEffect(() => {
-        setFullname(`${username.firstname} ${username.lastname}`)
+        if(username.firstname === "" && username.lastname === ""){
+            setDisable(true)
+        }else{
+            setDisable(false)
+            setFullname(`${username.firstname} ${username.lastname}`)
+        }
+        
     }, [username])
 
     const handleSubmit = () => {
@@ -50,17 +56,17 @@ export default function WelcomeForm() {
                     <li>3. Using your privileges as a signatory</li>
                 </ul>
                 <br/>
-                <h3>Please enter your name to get started</h3>
+                <h3>Please enter your name to get started.</h3>
             </div>
             <div className={styles.form_form}>
                 <div className={styles.form__group}>
-                    <label htmlFor="">First Name:</label>
-                    <input type="text" name="firstname" value={username.firstname} onChange={handleChange} className={styles.form__control} required />
+                    <label htmlFor="firstname">First Name:</label>
+                    <input type="text" id="firstname" name="firstname" value={username.firstname} onChange={handleChange} className={styles.form__control} required />
                 </div>
                 <br/>
                 <div className={styles.form__group}>
-                    <label htmlFor="">Last Name:</label>
-                    <input value={username.lastname} name="lastname" onChange={handleChange} type="text" className={styles.form__control} required />
+                    <label htmlFor="lastname">Last Name:</label>
+                    <input value={username.lastname} id="lastname" name="lastname" onChange={handleChange} type="text" className={styles.form__control} required />
                 </div>
                 <button disabled={disable} onClick={handleSubmit} className={`${styles.button} ${styles.form__button}`}>Next &rarr;</button>
             </div>

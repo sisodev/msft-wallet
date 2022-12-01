@@ -125,6 +125,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: white;
     margin-top: 80px;
+    border-radius: 5px;
 }
 
 .employee__portal__welcome__info {
@@ -163,4 +164,9 @@
     min-width: 50px;
     max-width: 200px;
     border-radius: 5px;
+    border: 0.2px solid #0014ef;
+}
+
+.portal_buttons span {
+    color: red;
 }

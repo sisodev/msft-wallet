@@ -28,15 +28,14 @@ export default function VerificationSuccess({verificationId}) {
         <div className={styles.verification__success__wrapper}>
             <div className={styles.verification__success__container}>
                 <div className={styles.verification__success__header}>
-                    <h2>Finishing up onboarding</h2>
-                    <p>We are finalizing some details before taking you to your</p>
-                    <p>personalized employee portal</p>
+                    <h2>Finishing up</h2>
+                    <p>We are finalizing some details before taking you to your privilege hub</p>
                 </div>
                 <div className={styles.verification__success_img}>
                     <Image src="/checked.png" alt="success" width={150} height={150} />
                 </div>
                 <div className={styles.verification__success__action__btn}>
-                    <button className={styles.verification__success__forward} onClick={goForward}>Continue onboarding</button>
+                    <button className={styles.verification__success__forward} onClick={goForward}>Continue</button>
                     <button className={styles.verification__success__return} onClick={returnHome}>Return home</button>
                 </div>
             </div>

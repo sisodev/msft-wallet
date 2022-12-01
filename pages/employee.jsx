@@ -59,12 +59,10 @@ function Employee({userData}){
                     <div className={styles.employee__portal__card}>
                         <div className={styles.employee__portal__welcome__info}>
                             <p className={styles.portal__welcome_msg}>Welcome to your Goldman Sachs homepage!</p>
-                            <p className={styles.portal__welcome__info}>This is your gateway to interacting with your Goldman Sachs Microsoft bank accounts as a privileged signatory</p>
+                            <p className={styles.portal__welcome__info}>You can now sign the necessary documents to open, close,<br/> and maintain accounts</p>
                         </div>
                         <div className={styles.portal__nav__buttons}>
-                            <button className={styles.portal_buttons}>Open an account</button>
-                            <button className={styles.portal_buttons}>Close an account</button>
-                            <button className={styles.portal_buttons}>Maintain an account</button>
+                            <button className={styles.portal_buttons}>Sign Documents <span>(2)</span></button>
                         </div>
                     </div>
                 </div>
