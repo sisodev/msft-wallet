@@ -3,7 +3,7 @@ import { withRouter } from "next/router";
 import styles from "../styles/Employee.module.css";
 
 
-function Employee({userData}){
+function Employee({userData,photo}){
     if(!userData) {
         return (<h1>Loading...</h1>)
     }
@@ -50,7 +50,7 @@ function Employee({userData}){
                             </div>
                             <div className={styles.employee__data}>
                                 <h3>Copy of passport photo page</h3>
-                                <p>johndoe.jpg</p>
+                                <Image src={photo} width={200} height={200} />
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,8 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            userData
+            userData,
+            photo: `/${userData.session_key}.jpg`
         }
     }
 }

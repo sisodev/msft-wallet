@@ -101,6 +101,11 @@
     font-size: 14px;
 }
 
+.employee__data img {
+    margin-top: 5px;
+    object-fit: contain;
+}
+
 .employee__data p {
     color: white;
     font-weight: 800;

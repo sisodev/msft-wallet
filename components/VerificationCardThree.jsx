@@ -49,7 +49,9 @@ export default function VerificationCardThree({verified, setIsVerificationSucces
     }
 
     const polling = async () => {
-        if(verificationResponse.state !== "") {
+        console.log(`the user activity is ${userActivity}`)
+        console.log(`the verfiication state is ${verificationResponse.state}`)
+        if(verificationResponse.state !== "" && userActivity !== "Verification complete") {
             try {
                 const resp = await fetch(`/api/verifier/presentation-request-callback-polling?state=${verificationResponse.state}`)
                 const data = await resp.text()
@@ -103,7 +105,7 @@ export default function VerificationCardThree({verified, setIsVerificationSucces
             </div>
             {/* { userActivity !== "" && userActivity !== "pending" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""} */}
             {scanIns ? <div className={styles.verification__qr__code}> 
-                   { verificationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> : userActivity === "QR Code is scanned." ? <div className={styles.loading__message}><Loader/> <p className={styles.loading__info}> waiting for digital wallet</p> </div>: <QRCodeSVG value={verificationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
+                   { verificationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> : userActivity === "QR Code is scanned." ? <div className={styles.loading__message}><Loader/> <p className={styles.loading__info}> waiting for digital wallet</p> </div>: <QRCodeSVG value={verificationResponse.url} size={150} /> } </div> : <div className={styles.verification__button}>
                             <button onClick={fetchPresentationRequest}> Access my Personalized portal</button>
             </div>}
     </div>
