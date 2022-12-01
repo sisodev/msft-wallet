@@ -13,7 +13,7 @@ import { useAppContext } from '../store/AppContext';
 
 export default function VerificationCardThree({verified, setIsVerificationSuccess,setverificationId}) {
 
-    const {hostname} = useAppContext();
+    const {hostname, verificationId,  } = useAppContext();
     
     const [scanIns, setScanIns] = useState(false)
     const [userActivity, setUserActivity] = useState("")
@@ -82,21 +82,29 @@ export default function VerificationCardThree({verified, setIsVerificationSucces
                 </div>
             </div>
             <div className={styles.verification__explanation}>
-                <div className={styles.verification__head}>
-                    <h2>{scanIns ? "Scan the QR code" : "Access the personalized portal to use"}</h2>
-                    <h2>{scanIns ? "With the Microsoft": "your privileges"}</h2>
-                    <h2>{scanIns ? "Authenticator app":""}</h2>
+                {userActivity === "QR Code is scanned." ? <div className={styles.verification__head}>
+                                <h2>Follow instructions on your other <br/> device</h2>
+                            </div> : <div className={styles.verification__head}>
+                                        <h2>{scanIns ? "Scan the QR code" : "Access the personalized portal to use"}</h2>
+                                        <h2>{scanIns ? "With the Microsoft": "your privileges"}</h2>
+                                        <h2>{scanIns ? "Authenticator app":""}</h2>
+                                    </div>           
+                }
+                { userActivity === "QR Code is scanned." ? <div className={styles.step__desc}>
+                        <p>They will appear once your digital wallet loads <br/> on your device</p>
+                </div> : <div className={styles.step__desc}>
+                    {scanIns ? <p>In the app, <b>open</b> the Verified ID tab</p>:<p>You will need a verifiable</p>}
+                    {scanIns ? <p>and <b>tap</b> on the QR code scan icon.</p>:<p>credential and the Microsoft  Authenticator App to get your</p>}
+                    {scanIns ? "":<p>privileges.</p>}
                 </div>
-                <div className={styles.step__desc}>
-                    {scanIns ? <p>In the app, <b>open</b> the Verified ID tab</p>:<p>You will need a Verifiable</p>}
-                    {scanIns ? <p>and <b>tap</b> on the QR code scan icon.</p>:<p>Credential and Microsoft.</p>}
-                    {scanIns ? "":<p>Authenticator to access.</p>}
-                </div>
+
+                }
+                
             </div>
-            { userActivity !== "" && userActivity !== "pending" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""}
+            {/* { userActivity !== "" && userActivity !== "pending" ? <div className={styles.verification__message}> <p>{userActivity}</p></div> : ""} */}
             {scanIns ? <div className={styles.verification__qr__code}> 
-                   { verificationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> : userActivity === "QR Code is scanned." ? <Loader/> : <QRCodeSVG value={verificationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
-                            <button onClick={fetchPresentationRequest}><FontAwesomeIcon icon={faFileSignature} /> Access Personalized portal</button>
+                   { verificationResponse.url === "" ?  <div className={styles.placeholder}>Loading...</div> : userActivity === "QR Code is scanned." ? <div className={styles.loading__message}><Loader/> <p className={styles.loading__info}> waiting for digital wallet</p> </div>: <QRCodeSVG value={verificationResponse.url} size={150} fgColor={"green"}/> } </div> : <div className={styles.verification__button}>
+                            <button onClick={fetchPresentationRequest}> Access my Personalized portal</button>
             </div>}
     </div>
     )

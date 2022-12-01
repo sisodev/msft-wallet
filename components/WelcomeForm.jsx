@@ -6,7 +6,7 @@ import { useAppContext } from "../store/AppContext";
 
 
 export default function WelcomeForm() {
-    const [username, setUserName] = useState({firstname: "Matthew", lastname: "Michael"})
+    const [username, setUserName] = useState({firstname: "Christina", lastname: "Easton"})
     const [disable, setDisable] = useState(false)
     const router = useRouter();
 
@@ -39,20 +39,18 @@ export default function WelcomeForm() {
     return(
         <div className={styles.form__container}>
             <div className={styles.form__instructions}>
-                <h1 className={styles.heading}> Welcome to the <br/> GoldmanSachs Team!</h1>
+                <h1 className={styles.heading}>Create Your Treasury <br/> Verified ID</h1>
                 <br/>
-                <h3>We are excited to have you onboard</h3>
-                <br/>
-                <h3>This online process will help set you up for success.</h3>
-                <h3>We will walk you through</h3>
+                <h3>This online process will result in the creation of</h3>
+                <h3>your digital credential issued by Microsoft Treasury</h3>
                 <br/>
                 <ul className={styles.instructions}>
                     <li>1. Accessing the employee poral</li>
-                    <li>2. Getting your verified employee credential</li>
-                    <li>3. Ordering your work equipment</li>
+                    <li>2. Getting your MSFT Treasury verified credential</li>
+                    <li>3. Using your privileges as a signatory</li>
                 </ul>
                 <br/>
-                <h3>Please enter your name and we will get started</h3>
+                <h3>Please enter your name to get started</h3>
             </div>
             <div className={styles.form_form}>
                 <div className={styles.form__group}>

@@ -51,7 +51,7 @@
     margin-bottom: 20px;
 }
 .verification__head h2 {
-    line-height: 28px;
+    line-height: 22px;
     font-weight: bolder;
     font-size: 20px;
     font-weight: 500;
@@ -92,6 +92,13 @@
     color: white;
     border: none;
 
+}
+
+.loading__message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .verification__message p {

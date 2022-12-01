@@ -11,7 +11,7 @@ export default function Home(props) {
       <Head>
         <title>MSFT-ENTRA</title>
         <meta name="description" content="Secure Wallet identity" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon_1.ico" />
       </Head>
         <h1>Landing Page, {props.hostname}</h1>
         <ImageUpload/>

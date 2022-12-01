@@ -16,7 +16,7 @@ export default function VerificationCardOne({verified, changeIsVerified}) {
         <div className={styles.verification__card__container}>
             <div className={styles.step__number}><h3>1</h3></div>
             <div className={styles.verification__head}>
-                <h2>Verify using Microsoft Treasury</h2>
+                <h2>Verify with Microsoft Treasury</h2>
             </div>
             <div className={styles.step__desc}>
                 <p>you will walk you through a process to submit the required information to get a credential Once done, you will be able to leverage that credential to use your privileges at Goldman Sachs.</p>

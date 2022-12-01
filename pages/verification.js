@@ -40,7 +40,7 @@ function Verification({hostname}) {
             </div>
             <div className={styles.verification__welcome}>
                 <h2>Hi {fullname.indexOf(" ") === -1 ? fullname : fullname.split(" ")[0]},</h2>
-                <h2>Lets create your digital credential</h2>
+                {issuanceId !== "" ? <h2>Lets verify your signatory status to access <br/> your privileges </h2> : <h2>Lets create your digital credential</h2>}
             </div>
         </div>
         <div className={styles.verification__cards}>

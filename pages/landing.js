@@ -7,7 +7,7 @@ export default function Landing() {
         <div className={styles.landing__container}>
             <WelcomeForm/>
             <div className={styles.landing__image}>
-                <Image src="/banner_image.png" width={500} height={500} />
+                <Image src="/banner_image.jpg" width={1000} height={600} />
             </div>
         </div>
     )

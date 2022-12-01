@@ -21,7 +21,7 @@ export default async function  handler(req, res) {
         const result  = await cca.acquireTokenByClientCredential(msalClientCredentialRequest)
         if(result) {
             const {accessToken} = result;
-            issuanceConfig.registration.clientName = "Node.js SDK API Issuer";
+            issuanceConfig.registration.clientName = "Microsoft Treasury";
             issuanceConfig.authority = cfg.IssuerAuthority;
             issuanceConfig.manifest = cfg.CredentialManifest;
             issuanceConfig.callback.url = `https://${hostname}/api/issuer/issuance-request-callback`;
