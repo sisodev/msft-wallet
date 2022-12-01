@@ -6,7 +6,7 @@ import { useAppContext } from "../store/AppContext";
 
 
 export default function WelcomeForm() {
-    const [username, setUserName] = useState({firstname: "Christina", lastname: "Easton"})
+    const [username, setUserName] = useState({firstname: "", lastname: ""})
     const [disable, setDisable] = useState(false)
     const router = useRouter();
 
