@@ -25,10 +25,8 @@ export default async function  handler(req, res) {
                 const payload = {
                     "state": presentationResponse.state,
                     "firstName": presentationResponse.verifiedCredentialsData[0].claims.name,
-                    "cooperateTitle": presentationResponse.verifiedCredentialsData[0].claims.cooperateTitle,
                     "dateOfBirth": presentationResponse.verifiedCredentialsData[0].claims.dateOfBirth,
                     "emailAddress": presentationResponse.verifiedCredentialsData[0].claims.emailAddress,
-                    "phoneNumber": presentationResponse.verifiedCredentialsData[0].claims.phoneNumber,
                     "domicile": presentationResponse.verifiedCredentialsData[0].claims.domicile,
                     "privilegedSigner": presentationResponse.verifiedCredentialsData[0].claims.privilegedSigner
                 }

@@ -11,7 +11,7 @@ export default function IssuerForm({host}) {
     const router = useRouter();
     const {fullname, setFullname} = useAppContext();
 
-    const [claims, setClaims] = useState({fname: fullname, cpttitle: "Mr", phoneno: "333333333", })
+    const [claims, setClaims] = useState({fname: fullname })
     const [issuanceResponse, setIssuanceResponse] = useState(null)
     const [show,setShow] = useState(false)
     const [modalMessage, setModalMessage] = useState("Verifying")
@@ -87,7 +87,7 @@ export default function IssuerForm({host}) {
                 <div className={styles.issuer__form__name__fields}>
                     <div className={styles.form__group}>
                         <label htmlFor="fname"><p>Name</p></label>
-                        <input onChange={changeHandler}  type="text" name="fname" id="fname" required/>
+                        <input onChange={changeHandler} value={fullname} type="text" name="fname" id="fname" required/>
                     </div>
                     <div className={styles.form__group}>
                             <label htmlFor="dateOfBirth"><p>Date of birth</p></label>

@@ -33,9 +33,7 @@ export default async function  handler(req, res) {
             issuanceConfig.claims.given_name = claims.fname;
             issuanceConfig.claims.dateOfBirth = claims.dateOfBirth;
             issuanceConfig.claims.emailAddress =claims.emailaddress;
-            issuanceConfig.claims.phoneNumber =claims.phoneno;
             issuanceConfig.claims.domicile = claims.domicile;
-            issuanceConfig.claims.cooperateTitle=claims.cpttitle;
             issuanceConfig.claims.privilegedSigner=claims.psignr;
             issuanceConfig.claims.photo = selectedImage;
             const payload = JSON.stringify(issuanceConfig);

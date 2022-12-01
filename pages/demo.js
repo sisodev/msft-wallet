@@ -1,4 +1,5 @@
 import { useEffect,  useState } from "react";
+import Dropdown from "../components/Dropdown";
 import ImageUpload from "../components/ImageUpload"
 import { useAppContext } from "../store/AppContext";
 
@@ -28,6 +29,7 @@ export default function Home() {
                 Fullname: {fullname}
             </div>
             <ImageUpload onFileChange={onFileChange}/>
+            <Dropdown/>
         </div>
     )
 }
