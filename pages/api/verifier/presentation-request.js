@@ -17,7 +17,7 @@ export default async function  handler(req, res) {
         const result  = await cca.acquireTokenByClientCredential(msalClientCredentialRequest)
         if(result) {
             const accessToken = result.accessToken;
-            presentationConfig.registration.clientName = "Node.js SDK API Verifier";
+            presentationConfig.registration.clientName = "Goldman Sachs";
             presentationConfig.authority = cfg["VerifierAuthority"]
             presentationConfig.requestedCredentials[0].acceptedIssuers[0] = cfg["IssuerAuthority"]
             presentationConfig.callback.url = `https://${hostname}/api/verifier/presentation-request-callback`;
