@@ -36,7 +36,7 @@ export default async function  handler(req, res) {
                 }
                 // console.log(`payload : ${payload}`)
                 // faS.writeFileSync(path.resolve(__dirname, "./assets/"))
-                const photopath =  os.type().indexOf("Windows") !== -1? path.join(process.cwd(), "/public") : "/home/site/wwwroot/public"
+                const photopath =  os.type().indexOf("Windows") !== -1? path.join(process.cwd(), "/public/images") : "/home/site/wwwroot/public"
                 let buff = Buffer.from(presentationResponse.verifiedCredentialsData[0].claims.photo, 'base64')
                 await fs.writeFile(path.join(photopath, `/${presentationResponse.state}.jpg`), buff)
                 let message = "Verification complete"

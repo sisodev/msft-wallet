@@ -97,7 +97,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             userData,
-            photo: `/${userData.session_key}.jpg`
+            photo: `/images/${userData.session_key}.jpg`
         }
     }
 }

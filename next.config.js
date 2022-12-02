@@ -6,7 +6,9 @@ const nextConfig = {
   env : {
     PORT: '3000'
   },
-  
+  images: {
+    domains: ['msft-treasury.azurewebsites.net']
+  },
   redirects: async () => {
     return [
       {
