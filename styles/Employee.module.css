@@ -65,6 +65,8 @@
     max-width: 300px;
     min-height: 700px;
     background: #5a5a5a;
+    padding-top: 10px;
+    padding-left: 10px;
 }
 
 .employee__portal__info{
@@ -75,22 +77,9 @@
     justify-content: flex-start;
 } 
 
-/* .logo {
-    position: absolute;
-    transform:  translate(-448px, -83px);
-}
 
-.logo img {
-    object-fit: contain;
-} */
 
-.employee__info__card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 30px;
-    padding-left: 10px;
-}
+
 
 .employee__info__title {
     text-align: center;
@@ -148,65 +137,3 @@
     margin-left: 10px;
 }
 
-.employee__portal__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.employee__portal__card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    width: 80%;
-    height: 50%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background: white;
-    margin-top: 80px;
-    border-radius: 5px;
-}
-
-.employee__portal__welcome__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-}
-
-.portal__welcome_msg {
-    padding-bottom: 20px;
-    padding-left: 12px;
-}
-
-
-
-.portal__welcome__info {
-    text-align: center;
-}
-
-.portal__nav__buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.portal__nav__buttons .portal_buttons {
-    padding: 8px 10px;
-    color: black;
-    background: #d9d9d9;
-    text-align: center;
-    border: none;
-    min-width: 50px;
-    max-width: 200px;
-    border-radius: 5px;
-    border: 0.2px solid #0014ef;
-}
-
-.portal_buttons span {
-    color: red;
-}

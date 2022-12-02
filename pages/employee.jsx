@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { withRouter } from "next/router";
+import PortalInfo from "../components/PortalInfo.jsx";
 import styles from "../styles/Employee.module.css";
 
 
@@ -53,27 +54,12 @@ function Employee({userData, photo}){
                             </div>
                             <div className={styles.employee__data}>
                                 <h3>Copy of passport photo page</h3>
-                                <Link href={photo}>{`${userData.firstName}.jpg`}</Link>
+                                <Image src="/sample_passport.jpg" width={250} height={250}/> 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={styles.employee__portal__info}>
-                    <div className={styles.logo}>
-                                        <Image src="/logo_goldman.png" width={64} height={64} />
-                    </div>
-                    <div className={styles.employee__portal__card}>
-                        
-                        <div className={styles.employee__portal__welcome__info}>
-                            <p className={styles.portal__welcome_msg}>Welcome to your Goldman Sachs homepage!</p>
-                            <p className={styles.portal__welcome__info}>You can now sign the necessary documents to open, close,<br/> and maintain accounts</p>
-                        </div>
-                        
-                        <div className={styles.portal__nav__buttons}>
-                            <button className={styles.portal_buttons}>Sign Documents <span>(2)</span></button>
-                        </div>
-                    </div>
-                </div>
+                <PortalInfo/>
             </div>
             
         </div>

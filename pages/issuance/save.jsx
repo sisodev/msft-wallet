@@ -49,18 +49,18 @@ function IssuanceSave({router}) {
         <div className={styles.issuance__save__wrapper}>
             <div className={styles.issuance__save__container}>
                 <div className={styles.issuance__header}>
-                    <div className={styles.issuance__title}><h1>True Identity</h1></div>
-                    <div className={styles.issuance__heading}><h2>Issue my Verified ID</h2></div>
+                    <div className={styles.issuance__title}><h1>Microsoft Treasury</h1></div>
+                    <div className={styles.issuance__heading}><h2>Issue my Treasury Verified ID</h2></div>
                 </div>
             </div>
             {success ?  <IssuanceSuccess fullname={fullname}/> : <div className={styles.issuance__identity__info__card}>
                 <div className={styles.issuance__identity__header}>
-                    <h2>Scan the QR code with Microsoft</h2>
-                    <h2>Authenticator to retrieve and save your</h2>
-                    <h2>Verified ID</h2>
+                    <h2>Scan the QR code with Microsoft Authenticator to</h2>
+                    <h2>retrieve and save your Microsoft Treasury Verified ID</h2>
+                    <h2></h2>
                 </div>
                 <div className={styles.issuance__identity__subtitle}>
-                    <h3>Use this to prove who you are with other parties.</h3>
+                    <h3>Use this to prove your status as a privileged signatory</h3>
                 </div>
                 <div className={styles.issuance__identity__scan__info}>
                     <p>How to scan</p>
