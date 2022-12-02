@@ -1,15 +1,10 @@
 import {QRCodeSVG} from 'qrcode.react';
 import {  useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFileSignature } from '@fortawesome/free-solid-svg-icons'
 
 
 import styles from "../styles/VerificationCardThree.module.css"
 import Loader from './Loader';
 import { useAppContext } from '../store/AppContext';
-
-
-
 
 export default function VerificationCardThree({verified, setIsVerificationSuccess,setverificationId}) {
 

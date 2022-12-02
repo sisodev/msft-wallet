@@ -6,6 +6,7 @@ const nextConfig = {
   env : {
     PORT: '3000'
   },
+  
   redirects: async () => {
     return [
       {
