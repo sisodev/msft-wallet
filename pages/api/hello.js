@@ -10,9 +10,9 @@ export default async function handler(req, res) {
     // const result = await selectAll() 
     // console.log(result)
     // res.status(200).json({result })
-    console.log(path.join(process.cwd(), "/public"))
+    let mypath = path.resolve(process.cwd(), "public/")
 
-    res.status(200).json({"test": "testing path"})
+    res.status(200).json({"path": mypath})
   }
   if(req.method === "POST") {
     console.log(req.body.image)
