@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { withRouter } from "next/router";
-// import MyImage from "../components/MyImage";
 import styles from "../styles/Employee.module.css";
 
 
@@ -54,7 +53,6 @@ function Employee({userData, photo}){
                             <div className={styles.employee__data}>
                                 <h3>Copy of passport photo page</h3>
                                 <Image src={photo} width={200} height={200} />
-                                {/* <MyImage  src={photo}  width={200} height={200}/> */}
                             </div>
                         </div>
                     </div>
