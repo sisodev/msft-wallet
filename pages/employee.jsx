@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { withRouter } from "next/router";
 import styles from "../styles/Employee.module.css";
 
@@ -52,7 +53,7 @@ function Employee({userData, photo}){
                             </div>
                             <div className={styles.employee__data}>
                                 <h3>Copy of passport photo page</h3>
-                                <Image src={photo} width={200} height={200} />
+                                <Link href={photo}>{`${userData.firstName}.jpg`}</Link>
                             </div>
                         </div>
                     </div>

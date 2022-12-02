@@ -126,6 +126,18 @@
     object-fit: contain;
 }
 
+.employee__data a {
+    margin-left: 10px;
+    text-decoration: underline;
+    color: white;
+    transition: all 0.2s ease-in;
+}
+
+.employee__data a:hover{
+    color: grey;
+    text-decoration: none;
+}
+
 .employee__data p {
     color: white;
     font-weight: 800;
