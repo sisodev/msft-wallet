@@ -70,16 +70,19 @@
 .employee__portal__info{
     position: relative;
     width: 100%;
+    display: flex;
+    align-items: flex;
+    justify-content: flex-start;
 } 
 
-.logo {
+/* .logo {
     position: absolute;
     transform:  translate(-448px, -83px);
 }
 
 .logo img {
     object-fit: contain;
-}
+} */
 
 .employee__info__card {
     display: flex;
