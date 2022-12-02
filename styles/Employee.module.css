@@ -58,8 +58,17 @@
 }
 
 .employee__portal__info{
+    position: relative;
     width: 100%;
 } 
+
+.logo {
+    position: absolute;
+}
+
+.logo img {
+    object-fit: contain;
+}
 
 .employee__info__card {
     display: flex;

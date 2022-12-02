@@ -56,6 +56,9 @@ function Employee({userData,photo}){
                     </div>
                 </div>
                 <div className={styles.employee__portal__info}>
+                    <div className={styles.logo}>
+                        <Image src="/logo_goldman.png" width={250} height={250} />
+                    </div>
                     <div className={styles.employee__portal__card}>
                         <div className={styles.employee__portal__welcome__info}>
                             <p className={styles.portal__welcome_msg}>Welcome to your Goldman Sachs homepage!</p>
