@@ -36,7 +36,7 @@ function Verification({hostname}) {
         <>
         <div className={styles.verification__container}>
             <div className={styles.verification_banner}>
-                <Image src="/verification_header_banner.png" alt="banner" width={1500} height={190} />
+                <Image src="/approved_photo_banner.jpg" alt="banner" width={1800} height={190} />
             </div>
             <div className={styles.verification__welcome}>
                 <h2>Hi {fullname.indexOf(" ") === -1 ? fullname : fullname.split(" ")[0]},</h2>

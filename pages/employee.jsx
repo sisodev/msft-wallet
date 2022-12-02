@@ -12,7 +12,7 @@ function Employee({userData,photo}){
         <div className={styles.employee__page__wrapper}>
             <div className={styles.employee__welcome__header}>
                 <div className={styles.verification_banner}>
-                    <Image src="/verification_header_banner.png" lat="banner" width={1500} height={190} />
+                    <Image src="/approved_photo_banner.jpg" lat="banner" width={1800} height={190} />
                 </div>
                 <div className={styles.employee__verification__status}>
                     <Image src="/check-mark.png" width={25} height={25} /> 
@@ -57,7 +57,7 @@ function Employee({userData,photo}){
                 </div>
                 <div className={styles.employee__portal__info}>
                     <div className={styles.logo}>
-                            <Image src="/logo_goldman.png" width={250} height={250} />
+                            <Image src="/logo_goldman.png" width={64} height={64} />
                     </div>
                     <div className={styles.employee__portal__card}>
                         <div className={styles.employee__portal__welcome__info}>

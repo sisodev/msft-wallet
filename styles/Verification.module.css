@@ -1,6 +1,6 @@
 .verification__container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -24,6 +24,7 @@
 }
 
 .verification_banner img{
+    object-position: 0% 70%;
     object-fit: cover;
     overflow: hidden;
 }

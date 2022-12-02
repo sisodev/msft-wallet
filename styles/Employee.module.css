@@ -11,7 +11,15 @@
     position: relative;
     align-items: center;
     justify-content: space-around;
+    width: 100%;
+    overflow: hidden;
     
+}
+
+.verification_banner img {
+    object-position:   10% 70%;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .employee__verification__status {
@@ -37,6 +45,7 @@
 .employee__verification__status img {
     object-fit: cover;
     overflow: hidden;
+    object-position: 30% 70%;
 }
 
 .employee__credential__status p {
@@ -54,6 +63,7 @@
 .employee__info__sidenav {
     min-width: 300px;
     max-width: 300px;
+    min-height: 700px;
     background: #5a5a5a;
 }
 
@@ -64,6 +74,7 @@
 
 .logo {
     position: absolute;
+    transform: translate(-458px, 86px);
 }
 
 .logo img {
