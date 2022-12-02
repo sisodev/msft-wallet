@@ -6,7 +6,7 @@ import { useAppContext } from "../store/AppContext";
 
 
 export default function WelcomeForm() {
-    const [username, setUserName] = useState({firstname: "Christina", lastname: "Easton"})
+    const [username, setUserName] = useState({firstname: "", lastname: ""})
     const [disable, setDisable] = useState(false)
     const router = useRouter();
 
@@ -51,7 +51,7 @@ export default function WelcomeForm() {
                 <h3>your digital credential issued by Microsoft Treasury</h3>
                 <br/>
                 <ul className={styles.instructions}>
-                    <li>1. Accessing the employee poral</li>
+                    <li>1. Accessing the employee portal</li>
                     <li>2. Getting your MSFT Treasury verified credential</li>
                     <li>3. Using your privileges as a signatory</li>
                 </ul>

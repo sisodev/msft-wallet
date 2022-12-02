@@ -15,7 +15,7 @@ export default function VerificationCardTwo({verified}) {
                 </div>
             </div>
             <div className={styles.verification__card}>
-                <Image src="/card_2.png" width={200} height={100} alt="true-id-card" />
+                <Image src="/true-id.png" width={200} height={100} alt="true-id-card" />
             </div>
         </div>
     )
