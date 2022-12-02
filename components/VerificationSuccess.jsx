@@ -36,7 +36,7 @@ export default function VerificationSuccess({verificationId}) {
                 </div>
                 <div className={styles.verification__success__action__btn}>
                     <button className={styles.verification__success__forward} onClick={goForward}>Continue</button>
-                    <button className={styles.verification__success__return} onClick={returnHome}>Return home</button>
+                    <button className={styles.verification__success__return} onClick={returnHome}>Return Home</button>
                 </div>
             </div>
         </div>
